@@ -1,22 +1,29 @@
-import { useState } from 'react'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import HeadBrand from './components/headBrand'
-
+import Login from './userPages/login.jsx'
+import Register from './userPages/register.jsx'
+import Register2 from './userPages/register2.jsx'
+import RecoverPassword from './userPages/recoverPassword.jsx'
+import NewPassword from './userPages/newPassword.jsx'// ...otros imports de vistas si es necesario...
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  // Altura del cintillo (ajusta si la imagen es más alta)
-  const cintilloHeight = 80; // px, puedes ajustar este valor
+  const cintilloHeight = 80;
 
   return (
-    <>
+    <Router>
       <HeadBrand />
       <div className="app-welcome" style={{ paddingTop: cintilloHeight }}>
-        <h1>Bienvenido al Sistema de Soporte Técnico</h1>
-        <p>Comienza a desarrollar tu aplicación aquí.</p>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/register2" element={<Register2 />} />
+          <Route path="/recover-password" element={<RecoverPassword />} />
+          <Route path="/new-password" element={<NewPassword />} />
+          {/* Agrega aquí más rutas según tus vistas */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
       </div>
-    </>
+    </Router>
   )
 }
 
