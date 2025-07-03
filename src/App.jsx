@@ -4,7 +4,7 @@ import Login from './userPages/login.jsx'
 import Register from './userPages/register.jsx'
 import Register2 from './userPages/register2.jsx'
 import RecoverPassword from './userPages/recoverPassword.jsx'
-import NewPassword from './userPages/newPassword.jsx'// ...otros imports de vistas si es necesario...
+import NewPassword from './userPages/newPassword.jsx'
 
 function App() {
   const cintilloHeight = 80;
@@ -17,9 +17,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/register2" element={<Register2 />} />
-          <Route path="/recover-password" element={<RecoverPassword />} />
-          <Route path="/new-password" element={<NewPassword />} />
-          {/* Agrega aquí más rutas según tus vistas */}
+          <Route path="/recoverpassword" element={<RecoverPassword />} />
+          <Route path="/newpassword" element={<NewPassword />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </div>
