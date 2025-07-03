@@ -3,7 +3,6 @@ import logoMini from '../../assets/logoMini.png'
 import HeadBrand from '../../components/headBrand'
 
 function SendReport() {
-  // Simulación de usuario conectado
   const usuario = {
     id: 1,
     nombre: 'Simón',
@@ -39,35 +38,46 @@ function SendReport() {
       fontFamily: 'Arial, sans-serif',
       backgroundColor: '#fff',
       minHeight: '100vh',
-      paddingTop: 35, 
       position: 'relative'
     }}>
-      <HeadBrand />
-
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        zIndex: 20,
+        background: '#fff'
+      }}>
+        <HeadBrand />
+      </div>
       <div style={{
         backgroundColor: '#3c558a',
         color: '#fff',
-        position: 'relative',
-        padding: '8px 30px', 
+        position: 'fixed',
+        left: 0,
+        width: '100%',
+        padding: '4px 24px', 
+        paddingTop: 50, 
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        minHeight: 50, 
-        zIndex: 1
+        minHeight: 36, 
+        zIndex: 10,
+        boxShadow: '0 2px 12px 0 rgba(47,75,139,0.12)'
       }}>
         <div
-          style={{ fontWeight: 'bold', cursor: 'pointer', fontSize: 14 }}
+          style={{ cursor: 'pointer', fontSize: 14 }}
           onClick={handleLogout}
         >
           Cerrar sesión
         </div>
 
-        <div style={{ fontSize: 16, fontWeight: 'bold', right: 10 }}>¿Qué hacemos?</div>
+        <div style={{ fontSize: 16, marginRight: 80 }}>¿Qué hacemos?</div>
 
         <div style={{
           position: 'absolute',
           top: '100%',
-          right: 10,
+          right: 80,
           backgroundColor: '#3c558a',
           color: '#fff',
           padding: '12px 20px',
@@ -81,11 +91,10 @@ function SendReport() {
           uso óptimo de recursos y una atención ágil y de calidad para cada cliente.
         </div>
       </div>
-
       <div style={{
         maxWidth: 1200,
         margin: '0 auto',
-        padding: '30px 20px',
+        padding: '110px 20px 20px 20px',
         boxSizing: 'border-box'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 40 }}>
@@ -111,19 +120,19 @@ function SendReport() {
             value={form.descripcion}
             onChange={handleChange}
             placeholder="ESCRIBA LA FALLA DE MANERA DETALLADA AQUI..."
-            rows={6}
+            rows={4}
             style={{
+              ...modernInputStyle,
               width: '100%',
-              padding: 12,
-              fontSize: 14,
-              borderRadius: 6,
-              border: '1px solid #ccc',
-              backgroundColor: '#f2f2f2',
-              resize: 'none',
-              boxSizing: 'border-box',
-              marginBottom: 20
+              resize: 'vertical',
+              minHeight: 60,
+              maxHeight: 180,
+              overflow: 'auto',
+              marginBottom: 28
             }}
             required
+            onFocus={e => e.target.style.borderColor = '#2f4b8b'}
+            onBlur={e => e.target.style.borderColor = '#e0e4ea'}
           />
 
           <div style={{ textAlign: 'center' }}>
@@ -147,30 +156,121 @@ function SendReport() {
   )
 }
 
-// Select reutilizable mejorado
+const selectOptions = {
+  asistencia: [
+    'No prende / No inicia',
+    'Se reinica',
+    'Malware(virus)',
+    'Configurar corrreo',
+    'Archivos perdidos',
+    'Mensaje de error',
+    'Bloqueo / Lentitud',
+    'Otro',
+    'Ninguno',
+  ],
+  revision: [
+    'Monitor',
+    'Teclado',
+    'Mouse',
+    'Regulador',
+    'Puertos USB',
+    'Unidad de CD / DVD',
+    'Sonido',
+    'otro',
+    'Ninguno',
+  ],
+  instalacion: [
+    'Todo completo',
+    'Antivirus',
+    'Paquete Office',
+    'Lector de PDF',
+    'Reproductor de video',
+    'Impresora',
+    'Thumderbird',
+    'Otro',
+    'Ninguno'
+  ],
+  respaldo: [
+    'Mis documentos',
+    'Escritorio',
+    'Unidad "C"',
+    'Descargas',
+    'Biblioteca',
+    'Otro',
+    'Ninguno'
+  ],
+  medio: [
+    'Unidad de CD',
+    'Unidad de DVD',
+    'Unidad USB',
+    'Microsoft Outlook',
+    'Carpeta compartida',
+    'Otro',
+    'Ninguno'
+  ]
+}
+
+// Estilos modernos para inputs y selects
+const modernInputStyle = {
+  padding: '14px 16px',
+  fontSize: 15,
+  borderRadius: 10,
+  border: '1.5px solid #e0e4ea',
+  background: '#fff',
+  boxShadow: '0 4px 24px 0 rgba(47,75,139,0.18)', // sombra más notoria
+  outline: 'none',
+  transition: 'border-color 0.2s, box-shadow 0.2s',
+  color: '#222',
+  marginBottom: 20
+}
+
+const modernSelectWrapper = {
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+  flex: '1 1 350px',
+  minWidth: 280,
+  marginBottom: 0
+}
+
+const modernSelect = {
+  ...modernInputStyle,
+  appearance: 'none',
+  WebkitAppearance: 'none',
+  MozAppearance: 'none',
+  cursor: 'pointer',
+  paddingRight: 40,
+  background: '#fff',
+}
+
+const arrowIconStyle = {
+  position: 'absolute',
+  right: 18,
+  top: '50%',
+  transform: 'translateY(-50%)',
+  pointerEvents: 'none',
+  fontSize: 18,
+  color: '#b0b8c9',
+}
+
 const Select = ({ name, value, onChange, label }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', flex: '1 1 350px', minWidth: 280 }}>
+  <div style={modernSelectWrapper}>
     <label style={{ fontWeight: 'bold', marginBottom: 6, fontSize: 13 }}>{label}</label>
     <select
       name={name}
       value={value}
       onChange={onChange}
-      style={{
-        padding: 10,
-        fontSize: 14,
-        borderRadius: 6,
-        border: '1px solid #ccc',
-        backgroundColor: '#f2f2f2',
-        boxSizing: 'border-box'
-      }}
+      style={modernSelect}
       required
+      onFocus={e => e.target.style.borderColor = '#2f4b8b'}
+      onBlur={e => e.target.style.borderColor = '#e0e4ea'}
     >
       <option value="" disabled hidden>Seleccione una opción</option>
-      <option>Opción 1</option>
-      <option>Opción 2</option>
-      <option>Opción 3</option>
-      <option>Opción 4</option>
+      {selectOptions[name] && selectOptions[name].map((opt, idx) => (
+        <option key={idx} value={opt}>{opt}</option>
+      ))}
     </select>
+    <span style={arrowIconStyle}>▼</span>
   </div>
 )
 
