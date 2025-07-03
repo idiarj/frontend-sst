@@ -12,21 +12,23 @@ function App() {
   const cintilloHeight = 80;
 
   return (
-    <Router>
-      <HeadBrand />
-      <div className="app-welcome" style={{ paddingTop: cintilloHeight }}>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/register2" element={<Register2 />} />
-          <Route path="/recoverpassword" element={<RecoverPassword />} />
-          <Route path="/newpassword" element={<NewPassword />} />
-          <Route path="/admin/devices" element={<Devices />} />
-          <Route path="/user/sendreport" element={<SendReport />} />
-          <Route path="*" element={<Navigate to="/login" replace />} />
-        </Routes>
-      </div>
-    </Router>
+    <div style={{ fontFamily: 'Inter, Arial, sans-serif' }}>
+      <Router>
+        <HeadBrand />
+        <div className="app-welcome" style={{ paddingTop: cintilloHeight }}>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/register2" element={<Register2 />} />
+            <Route path="/recoverpassword" element={<RecoverPassword />} />
+            <Route path="/newpassword" element={<NewPassword />} />
+            <Route path="/admin/devices" element={<Devices />} />
+            <Route path="/user/sendreport" element={<SendReport />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          </Routes>
+        </div>
+      </Router>
+    </div>
   )
 }
 

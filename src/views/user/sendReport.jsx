@@ -35,7 +35,7 @@ function SendReport() {
 
   return (
     <div style={{
-      fontFamily: 'Arial, sans-serif',
+      fontFamily: 'Inter, Arial, sans-serif', 
       backgroundColor: '#fff',
       minHeight: '100vh',
       position: 'relative'
