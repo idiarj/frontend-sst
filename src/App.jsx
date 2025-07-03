@@ -5,6 +5,8 @@ import Register from './userPages/register.jsx'
 import Register2 from './userPages/register2.jsx'
 import RecoverPassword from './userPages/recoverPassword.jsx'
 import NewPassword from './userPages/newPassword.jsx'
+import Devices from './views/admin/devices.jsx'
+import SendReport from './views/user/sendReport.jsx'
 
 function App() {
   const cintilloHeight = 80;
@@ -19,6 +21,8 @@ function App() {
           <Route path="/register2" element={<Register2 />} />
           <Route path="/recoverpassword" element={<RecoverPassword />} />
           <Route path="/newpassword" element={<NewPassword />} />
+          <Route path="/admin/devices" element={<Devices />} />
+          <Route path="/user/sendreport" element={<SendReport />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </div>

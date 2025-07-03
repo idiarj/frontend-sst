@@ -1,0 +1,48 @@
+/*
+  Estilos para evitar reestructuración al hacer zoom:
+  - Fijar el ancho y el layout principal
+  - Usar unidades absolutas (px)
+  - Evitar flex/grid responsivo
+*/
+
+html, body {
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.app-welcome {
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Opcional: Forzar que los formularios y paneles no cambien de tamaño */
+form, .panel, .fixed-box {
+  width: 400px !important;
+  min-width: 400px !important;
+  max-width: 400px !important;
+  margin: 0 auto;
+}
