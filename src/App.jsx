@@ -22,7 +22,7 @@ function App() {
           <Route path="/recoverpassword" element={<RecoverPassword />} />
           <Route path="/newpassword" element={<NewPassword />} />
           <Route path="/admin/devices" element={<Devices />} />
-          <Route path="/user/sendReport" element={<SendReport />} />
+          <Route path="/user/sendreport" element={<SendReport />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </div>

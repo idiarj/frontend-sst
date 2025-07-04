@@ -1,0 +1,26 @@
+{
+  "reportes": [
+    {
+      "id": 1,
+      "numero": "001",
+      "fecha_envio": "2025-05-01",
+      "nombre": "Simón",
+      "cedula": "18045239",
+      "cargo": "Asistente",
+      "departamento": "Recursos Humanos",
+      "codigo_equipo": "002",
+      "observaciones": "El monitor del equipo 002 de la oficina de recursos humanos presenta parpadeos constantes desde el encendido. Ya se probó con otro cable HDMI y el problema persiste. El equipo es utilizado diariamente para tareas administrativas y afecta la productividad del área.",
+      "solucion": "Se reemplazó el monitor por presentar falla interna de hardware. El nuevo equipo funciona correctamente y sin parpadeos.",
+      "diagnostico": "El monitor del equipo 002 presenta parpadeos constantes desde el encendido, incluso tras cambiar el cable HDMI. Se probó en otro equipo y el problema persiste, por lo que se descarta falla en la conexión o tarjeta gráfica. Se concluye que la falla es interna del monitor, posiblemente en la retroiluminación o fuente de alimentación. Se recomienda reemplazo.",
+      "estado": "PENDIENTE",
+      "nivel_respuesta": "MEDIA",
+      "tecnico_asignado": "DAGNIS"
+    }
+  ],
+  "tecnicos": [
+    "DAGNIS",
+    "MIGUEL",
+    "ANA",
+    "JUAN"
+  ]
+}
