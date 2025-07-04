@@ -1,32 +1,41 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaIdCard, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
 import userPageImage from '../assets/userPageImage.png'
 import logo from '../assets/logo.png'
 import { users } from './users.js'
+import { achetetepese } from '../utils/fetch.js'
 
 function Login() {
-  const [cedula, setCedula] = useState('')
+  const [id_cardNumber, setId_CardNumber] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
-    // Buscar usuario
-    const foundUser = users.find(u => u.cedula === cedula && u.password === password)
-    if (!foundUser) {
-      setError('Cédula o contraseña incorrecta')
-      return
-    }
-    // Guardar rol en localStorage
-    localStorage.setItem('role', foundUser.role)
-    if (foundUser.role === 'admin') {
-      navigate('/admin/devices')
-    } else {
-      navigate('/user/sendreport')
+    try {
+      console.log('Attempting to login with id_cardNumber:', id_cardNumber, 'and password:', password)
+      const response = await achetetepese.post({
+        endpoint: '/auth/login',
+        body: { id_cardNumber, password },
+        credentials: 'include',
+      })
+      console.log('Login response:', response)
+      const data = await response.json()
+      console.table(data)
+
+      if(!response.ok && !data.success) {
+        console.error('Login failed:', data.error)
+        setError(data.error || 'Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.')
+        return
+      }
+      navigate('/user/sendReport', {replace: true})
+    } catch (error) {
+      console.error('Error during login:', error)
+      setError('Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.');
     }
   }
 
@@ -75,8 +84,8 @@ function Login() {
                 <input
                   type="text"
                   placeholder="Cédula"
-                  value={cedula}
-                  onChange={(e) => setCedula(e.target.value)}
+                  value={id_cardNumber}
+                  onChange={(e) => setId_CardNumber(e.target.value)}
                   required
                   style={{ flex: 1, border: 'none', outline: 'none', fontSize: 14 }}
                 />
