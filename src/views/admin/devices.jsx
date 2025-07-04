@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HeadBrand from '../../components/headBrand';
 import { AiOutlineIdcard, AiOutlinePaperClip } from 'react-icons/ai';
 import { MdOutlineNoteAlt, MdDevices, MdEngineering, MdOutlineHome } from 'react-icons/md';
 import { IoMdPerson } from 'react-icons/io';
+import { fetchMockReport } from './fetchMockReport';
+import logoMini from '../../assets/logoMini.png';
 
 function ReportDetails() {
   const [status, setStatus] = useState('PENDIENTE');
   const [responseLevel, setResponseLevel] = useState('');
-
   const [report, setReport] = useState({
     nombre: '',
     cedula: '',
@@ -19,6 +20,36 @@ function ReportDetails() {
     diagnostico: '',
     tecnico: ''
   });
+
+  useEffect(() => {
+    fetchMockReport().then(data => {
+      setReport(prev => ({
+        ...prev,
+        ...data.datos_personales,
+        observaciones: data.observaciones,
+        solucion: data.solucion,
+        diagnostico: data.diagnostico,
+        tecnico: data.tecnico
+      }));
+      setStatus(data.estado);
+      setResponseLevel(data.nivel_respuesta);
+    }).catch(err => {
+      // Para desarrollo local con Vite, usar import para cargar el JSON
+      import('./mockReport.json').then(module => {
+        const data = module.default.reporte || module.reporte;
+        setReport(prev => ({
+          ...prev,
+          ...data.datos_personales,
+          observaciones: data.observaciones,
+          solucion: data.solucion,
+          diagnostico: data.diagnostico,
+          tecnico: data.tecnico
+        }));
+        setStatus(data.estado);
+        setResponseLevel(data.nivel_respuesta);
+      });
+    });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +68,14 @@ function ReportDetails() {
   return (
     <div style={{ fontFamily: 'Inter, sans-serif', backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
       <HeadBrand />
-      <div style={{ padding: '120px 20px 40px', maxWidth: 1200, margin: '0 auto' }}>
+      {/* Título de pantalla y logo juntos, menos espacio debajo */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '32px 0 0 32px', marginBottom: 12, paddingTop: 40 }}>
+        <span style={{ fontWeight: 700, fontSize: 22, letterSpacing: 1, display: 'flex', alignItems: 'center', gap: 10 }}>
+          <img src={logoMini} alt="Logo mini" style={{ height: 36, marginRight: 8 }} />
+          ENTRADA DE SOLICITUD DE REPORTES
+        </span>
+      </div>
+      <div style={{ padding: '24px 20px 40px', maxWidth: 1200, margin: '0 auto' }}>
         {/* Título y fecha */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 24, fontWeight: 'bold', marginBottom: 30 }}>
           <MdOutlineNoteAlt size={28} />
@@ -56,15 +94,15 @@ function ReportDetails() {
           {/* Columna izquierda - datos personales */}
           <div style={{ flex: 1, minWidth: 320 }}>
             <div style={{ display: 'flex', gap: 10, marginBottom: 10 }}>
-              <InputWithIcon icon={<IoMdPerson />} name="nombre" placeholder="Nombre" value={report.nombre} onChange={handleChange} />
-              <InputWithIcon icon={<AiOutlineIdcard />} name="cedula" placeholder="Cédula" value={report.cedula} onChange={handleChange} />
+              <InputWithIcon icon={<IoMdPerson />} name="nombre" placeholder="Nombre" value={report.nombre} onChange={handleChange} readOnly />
+              <InputWithIcon icon={<AiOutlineIdcard />} name="cedula" placeholder="Cédula" value={report.cedula} onChange={handleChange} readOnly />
             </div>
             <div style={{ display: 'flex', gap: 10, marginBottom: 10 }}>
-              <InputWithIcon icon={<AiOutlinePaperClip />} name="cargo" placeholder="Cargo" value={report.cargo} onChange={handleChange} />
+              <InputWithIcon icon={<MdOutlineHome />} name="oficina" placeholder="Oficina" value={report.oficina} onChange={handleChange} readOnly />
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
-              <InputWithIcon icon={<MdOutlineHome />} name="oficina" placeholder="Oficina" value={report.oficina} onChange={handleChange} />
-              <InputWithIcon icon={<MdDevices />} name="dispositivo" placeholder="# de dispositivo" value={report.dispositivo} onChange={handleChange} />
+              <InputWithIcon icon={<AiOutlinePaperClip />} name="cargo" placeholder="Cargo" value={report.cargo} onChange={handleChange} readOnly />
+              <InputWithIcon icon={<MdDevices />} name="dispositivo" placeholder="# de dispositivo" value={report.dispositivo} onChange={handleChange} readOnly />
             </div>
           </div>
 
@@ -130,11 +168,17 @@ function ReportDetails() {
           </div>
         </div>
 
-        {/* Observaciones, Solución y Diagnóstico */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 20 }}>
-          <TextArea label="Observaciones" name="observaciones" value={report.observaciones} onChange={handleChange} />
-          <TextArea label="Solución" name="solucion" value={report.solucion} onChange={handleChange} />
-          <TextArea label="Diagnóstico" name="diagnostico" value={report.diagnostico} onChange={handleChange} />
+        {/* Observaciones, Diagnóstico y Solución en dos columnas */}
+        <div style={{ display: 'flex', gap: 48, marginBottom: 28 }}>
+          <div style={{ flex: 1 }}>
+            <TextArea label="Observaciones" name="observaciones" value={report.observaciones} onChange={handleChange} inputHeight={120} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <TextArea label="Diagnóstico" name="diagnostico" value={report.diagnostico} onChange={handleChange} inputHeight={120} />
+          </div>
+        </div>
+        <div style={{ marginBottom: 24, marginTop: 24 }}>
+          <TextArea label="Solución" name="solucion" value={report.solucion} onChange={handleChange} inputHeight={100} />
         </div>
 
         {/* Botón editar */}
@@ -156,7 +200,7 @@ function ReportDetails() {
 }
 
 // Subcomponentes reutilizables
-const InputWithIcon = ({ icon, name, placeholder, value, onChange }) => (
+const InputWithIcon = ({ icon, name, placeholder, value, onChange, readOnly }) => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
     {icon}
     <input
@@ -164,12 +208,13 @@ const InputWithIcon = ({ icon, name, placeholder, value, onChange }) => (
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      style={{ ...inputStyle, flex: 1 }}
+      readOnly={readOnly}
+      style={{ ...inputStyle, flex: 1, backgroundColor: readOnly ? '#f5f5f5' : '#fff' }}
     />
   </div>
 );
 
-const TextArea = ({ label, name, value, onChange }) => (
+const TextArea = ({ label, name, value, onChange, inputHeight }) => (
   <div style={{ marginBottom: 20 }}>
     <div style={labelStyle}>{label}</div>
     <textarea
@@ -177,7 +222,7 @@ const TextArea = ({ label, name, value, onChange }) => (
       value={value}
       onChange={onChange}
       rows={3}
-      style={{ ...inputStyle, width: '100%', resize: 'vertical' }}
+      style={{ ...inputStyle, width: '100%', resize: 'vertical', minHeight: inputHeight || 80 }}
     />
   </div>
 );
