@@ -133,7 +133,7 @@ function Login() {
                     style={{ color: '#2f4b8b' }}
                     onClick={e => {
                       e.preventDefault()
-                      navigate('/register')
+                      navigate('/verify-id')
                     }}
                   >
                     HAGA CLICK AQUÍ

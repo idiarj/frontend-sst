@@ -3,7 +3,6 @@ import { AiOutlineIdcard, AiOutlinePaperClip } from 'react-icons/ai';
 import { MdOutlineNoteAlt, MdDevices, MdEngineering, MdOutlineHome } from 'react-icons/md';
 import { IoMdPerson } from 'react-icons/io';
 
-// Subcomponentes reutilizables
 const InputWithIcon = ({ icon, name, placeholder, value, onChange, readOnly }) => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
     {icon}
@@ -45,7 +44,6 @@ const TextArea = ({ label, name, value, onChange, inputHeight, readOnly, placeho
   </div>
 );
 
-// Modern styles from sendReport.jsx
 const modernInputStyle = {
   padding: '14px 16px',
   fontSize: 15,
@@ -120,6 +118,7 @@ const estados = [
 const niveles = ['ALTA', 'MEDIA', 'BAJA'];
 
 const Report = ({ report, status, responseLevel, onChange, setStatus, setResponseLevel, idx }) => {
+
   const [tecnicos, setTecnicos] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [localDiag, setLocalDiag] = useState(report.diagnostico || "");
@@ -133,7 +132,6 @@ const Report = ({ report, status, responseLevel, onChange, setStatus, setRespons
     });
   }, []);
 
-  // Sincroniza con props si cambian externamente
   useEffect(() => {
     setLocalStatus(status || "PENDIENTE");
   }, [status]);
@@ -153,7 +151,9 @@ const Report = ({ report, status, responseLevel, onChange, setStatus, setRespons
 
   return (
     <div style={{ background: '#fff', borderRadius: 16, boxShadow: '0 2px 8px #0001', marginBottom: 32, padding: 24 }}>
-      {/* Título y fecha */}
+      <div>
+        
+      </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 20, fontWeight: 'bold', marginBottom: 30 }}>
         <MdOutlineNoteAlt size={24} />
         REPORTE #{report.id || idx + 1}
@@ -243,8 +243,36 @@ const Report = ({ report, status, responseLevel, onChange, setStatus, setRespons
           </div>
         </div>
       </div>
-      {/* Observaciones, Diagnóstico y Solución en dos columnas */}
-      <div style={{ display: 'flex', gap: 48, marginBottom: 10 , marginRight: 25 }}>
+      <div style={{ display: 'flex', gap: 16, marginBottom: 20, marginRight: 25, justifyContent: 'space-between' }}>
+        { [
+          { key: 'asistencia', label: 'Asistencia Tecnica' },
+          { key: 'revision', label: 'Revision y/o Mantenimineto' },
+          { key: 'instalacion', label: 'Instalar y/o Reinstalar' },
+          { key: 'respaldo', label: 'Copia De Seguridad' },
+          { key: 'medio', label: 'Medio Fisico' }
+        ].map(opt => (
+          <div key={opt.key} style={{ flex: 1, minWidth: 100, maxWidth: 150 }}>
+            <div style={{ fontWeight: 'bold', fontSize: 13, marginBottom: 6 }}>{opt.label}</div>
+            <input
+              type="text"
+              value={report[opt.key] && report[opt.key] !== 'Ninguno' ? report[opt.key] : 'OPCIONES'}
+              readOnly
+              style={{
+                ...modernInputStyle,
+                width: '100%',
+                color: report[opt.key] && report[opt.key] !== 'Ninguno' ? '#222' : '#888',
+                background: '#f5f5f5',
+                cursor: 'not-allowed',
+                textAlign: 'center',
+                fontWeight: 500,
+                fontSize: 13,
+                marginBottom: 0
+              }}
+            />
+          </div>
+        )) }
+      </div>
+      <div style={{ display: 'flex', gap: 48, marginRight: 25 }}>
         <div style={{ flex: 1 }}>
           <TextArea label="Observaciones" name="observaciones" value={report.observaciones} onChange={onChange} inputHeight={120} readOnly />
         </div>
@@ -272,7 +300,7 @@ const Report = ({ report, status, responseLevel, onChange, setStatus, setRespons
           )}
         </div>
       </div>
-      <div style={{ marginBottom: 10, marginTop: 10 , marginRight: 25}}>
+      <div style={{marginRight: 25}}>
         {editMode ? (
           <TextArea 
             label="Solución" 
@@ -324,7 +352,7 @@ const Report = ({ report, status, responseLevel, onChange, setStatus, setRespons
           }}
           onClick={() => setEditMode(e => !e)}
         >
-          {editMode ? 'Cancelar' : 'Editar '}
+          {editMode ? 'Cancelar' : 'Editar ' }
         </button>
       </div>
     </div>
