@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
 import userPageImage from '../assets/userPageImage.png'
 import logo from '../assets/logo.png'
+import { modernInputStyle } from './modernInputStyle.js'
 
 function Register2() {
   const [email, setEmail] = useState('')
@@ -59,10 +60,9 @@ function Register2() {
                 display: 'flex',
                 alignItems: 'center',
                 marginBottom: 16,
-                border: '1px solid #ccc',
-                borderRadius: 6,
-                padding: '8px 10px',
-                backgroundColor: '#fff'
+                backgroundColor: '#fff',
+                border: 'none',
+                padding: 0
               }}>
                 <FaEnvelope size={18} color="#2f4b8b" style={{ marginRight: 8 }} />
                 <input
@@ -71,18 +71,20 @@ function Register2() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  style={{ flex: 1, border: 'none', outline: 'none', fontSize: 14 }}
+                  style={{ ...modernInputStyle, flex: 1, border: 'none', outline: 'none', fontSize: 14 }}
+                  onFocus={e => e.target.style.borderColor = '#2f4b8b'}
+                  onBlur={e => e.target.style.borderColor = '#e0e4ea'}
                 />
               </div>
 
               <div style={{
+                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
                 marginBottom: 16,
-                border: '1px solid #ccc',
-                borderRadius: 6,
-                padding: '8px 10px',
-                backgroundColor: '#fff'
+                backgroundColor: '#f7f9fc',
+                border: 'none',
+                padding: 0
               }}>
                 <FaLock size={18} color="#2f4b8b" style={{ marginRight: 8 }} />
                 <input
@@ -91,20 +93,26 @@ function Register2() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  style={{ flex: 1, border: 'none', outline: 'none', fontSize: 14 }}
+                  style={{ ...modernInputStyle, flex: 1, border: 'none', outline: 'none', fontSize: 14, paddingRight: 44 }}
+                  onFocus={e => e.target.style.borderColor = '#2f4b8b'}
+                  onBlur={e => e.target.style.borderColor = '#e0e4ea'}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(prev => !prev)}
                   style={{
+                    position: 'absolute',
+                    right: 12,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
                     background: 'none',
                     border: 'none',
                     cursor: 'pointer',
-                    padding: 0,
-                    marginLeft: 8
+                    padding: 0
                   }}
+                  tabIndex={-1}
                 >
-                  {showPassword ? <FaEyeSlash color="#2f4b8b" size={26}/> : <FaEye color="#2f4b8b" size={26} />}
+                  {showPassword ? <FaEyeSlash color="#2f4b8b" size={22}/> : <FaEye color="#2f4b8b" size={22} />}
                 </button>
               </div>
 

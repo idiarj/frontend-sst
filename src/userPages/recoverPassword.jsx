@@ -4,6 +4,7 @@ import { FaEnvelope } from 'react-icons/fa'
 import userPageImage from '../assets/userPageImage.png'
 import logo from '../assets/logo.png'
 import { validarCorreo } from '../utils/validarCorreo'
+import { modernInputStyle } from './modernInputStyle.js'
 
 function RecoverPassword() {
   const [email, setEmail] = useState('')
@@ -117,10 +118,9 @@ function RecoverPassword() {
                     display: 'flex',
                     alignItems: 'center',
                     marginBottom: 16,
-                    border: '1px solid #ccc',
-                    borderRadius: 6,
-                    padding: '8px 10px',
-                    backgroundColor: '#fff'
+                    backgroundColor: '#f7f9fc',
+                    border: 'none',
+                    padding: 0
                   }}>
                     <FaEnvelope size={18} color="#2f4b8b" style={{ marginRight: 8 }} />
                     <input
@@ -129,7 +129,9 @@ function RecoverPassword() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      style={{ flex: 1, border: 'none', outline: 'none', fontSize: 14 }}
+                      style={{ ...modernInputStyle, flex: 1, border: 'none', outline: 'none', fontSize: 14 }}
+                      onFocus={e => e.target.style.borderColor = '#2f4b8b'}
+                      onBlur={e => e.target.style.borderColor = '#e0e4ea'}
                     />
                   </div>
 

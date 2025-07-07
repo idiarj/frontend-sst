@@ -5,6 +5,7 @@ import userPageImage from '../assets/userPageImage.png'
 import logo from '../assets/logo.png'
 import { users } from './users.js'
 import { achetetepese } from '../utils/fetch.js'
+import { modernInputStyle } from './modernInputStyle.js'
 
 function Login() {
   const [id_cardNumber, setId_CardNumber] = useState('')
@@ -75,10 +76,9 @@ function Login() {
                 display: 'flex',
                 alignItems: 'center',
                 marginBottom: 16,
-                border: '1px solid #ccc',
-                borderRadius: 6,
-                padding: '8px 10px',
-                backgroundColor: '#fff'
+                backgroundColor: '#f7f9fc',
+                border: 'none',
+                padding: 0
               }}>
                 <FaIdCard size={18} color="#2f4b8b" style={{ marginRight: 8 }} />
                 <input
@@ -87,18 +87,20 @@ function Login() {
                   value={id_cardNumber}
                   onChange={(e) => setId_CardNumber(e.target.value)}
                   required
-                  style={{ flex: 1, border: 'none', outline: 'none', fontSize: 14 }}
+                  style={{ ...modernInputStyle, flex: 1, border: 'none', outline: 'none', fontSize: 14 }}
+                  onFocus={e => e.target.style.borderColor = '#2f4b8b'}
+                  onBlur={e => e.target.style.borderColor = '#e0e4ea'}
                 />
               </div>
 
               <div style={{
+                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
                 marginBottom: 16,
-                border: '1px solid #ccc',
-                borderRadius: 6,
-                padding: '8px 10px',
-                backgroundColor: '#fff'
+                backgroundColor: '#f7f9fc',
+                border: 'none',
+                padding: 0
               }}>
                 <FaLock size={18} color="#2f4b8b" style={{ marginRight: 8 }} />
                 <input
@@ -107,20 +109,27 @@ function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  style={{ flex: 1, border: 'none', outline: 'none', fontSize: 14 }}
+                  style={{ ...modernInputStyle, flex: 1, border: 'none', outline: 'none', fontSize: 14, paddingRight: 44 }}
+                  onFocus={e => e.target.style.borderColor = '#2f4b8b'}
+                  onBlur={e => e.target.style.borderColor = '#e0e4ea'}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(prev => !prev)}
                   style={{
+                    position: 'absolute',
+                    right: 12,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
                     background: 'none',
                     border: 'none',
                     cursor: 'pointer',
                     padding: 0,
                     marginLeft: 8
                   }}
+                  tabIndex={-1}
                 >
-                  {showPassword ? <FaEyeSlash color="#2f4b8b" size={26}/> : <FaEye color="#2f4b8b" size={26} />}
+                  {showPassword ? <FaEyeSlash color="#2f4b8b" size={22}/> : <FaEye color="#2f4b8b" size={22} />}
                 </button>
               </div>
 

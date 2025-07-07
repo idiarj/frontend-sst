@@ -217,7 +217,7 @@ const modernInputStyle = {
   borderRadius: 10,
   border: '1.5px solid #e0e4ea',
   background: '#fff',
-  boxShadow: '0 4px 24px 0 rgba(47,75,139,0.18)', // sombra más notoria
+  boxShadow: '0 4px 24px 0 rgba(47,75,139,0.18)',
   outline: 'none',
   transition: 'border-color 0.2s, box-shadow 0.2s',
   color: '#222',
