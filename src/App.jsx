@@ -6,6 +6,7 @@ import Register2 from './userPages/register2.jsx'
 import RecoverPassword from './userPages/recoverPassword.jsx'
 import NewPassword from './userPages/newPassword.jsx'
 import Devices from './views/admin/devices.jsx'
+import Reports from './views/admin/reports.jsx'
 import SendReport from './views/user/sendReport.jsx'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/recoverpassword" element={<RecoverPassword />} />
           <Route path="/newpassword" element={<NewPassword />} />
           <Route path="/admin/devices" element={<Devices />} />
+          <Route path="/admin/reports" element={<Reports />} />
           <Route path="/user/sendreport" element={<SendReport />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>

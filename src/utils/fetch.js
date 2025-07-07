@@ -65,5 +65,5 @@ class Fetch{
 
 
 
-export const achetetepese = new Fetch('http://localhost:3000');
+export const achetetepese = new Fetch('https://backend-sst.onrender.com');
 
