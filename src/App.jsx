@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import HeadBrand from './components/headBrand'
-import Login from './userPages/login.jsx'
-import Register from './userPages/register.jsx'
-import Register2 from './userPages/register2.jsx'
-import RecoverPassword from './userPages/recoverPassword.jsx'
-import NewPassword from './userPages/newPassword.jsx'
+import Login from './views/auth/login.jsx'
+import VerifyIdCard from './views/auth/VerifyIdCard.jsx'
+import Register from './views/auth/register.jsx'
+import RecoverPassword from './views/auth/recoverPassword.jsx'
+import NewPassword from './views/auth/newPassword.jsx'
 import Devices from './views/admin/devices.jsx'
 import Reports from './views/admin/reports.jsx'
 import SendReport from './views/user/sendReport.jsx'
@@ -18,8 +18,8 @@ function App() {
       <div className="app-welcome" style={{ paddingTop: cintilloHeight }}>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/verify-id" element={<VerifyIdCard />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/register2" element={<Register2 />} />
           <Route path="/recoverpassword" element={<RecoverPassword />} />
           <Route path="/newpassword" element={<NewPassword />} />
           <Route path="/admin/devices" element={<Devices />} />
