@@ -14,7 +14,7 @@ function Reports() {
       const base = data;
       const fakeReports = [
         { ...base.datos_personales, ...base, ...{ id: '001' } },
-        { ...base.datos_personales, ...base, ...{ id: '002', nombre: 'Maria', cedula: '18045240', dispositivo: '003', estado: 'EN PROCESO', nivel_respuesta: 'ALTA', tecnico: 'JUAN' } },
+        { ...base.datos_personales, ...base, ...{ id: '002', nombre: 'Maria', cedula: '18045240', dispositivo: '003', estado: 'PENDIENTE', nivel_respuesta: 'MEDIA', tecnico: 'JUAN' } },
       ];
       setReports(fakeReports);
       setStatuses(fakeReports.map(r => r.estado || 'PENDIENTE'));
