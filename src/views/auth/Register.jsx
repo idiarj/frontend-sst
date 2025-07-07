@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
+import { achetetepese } from '../../utils/fetch'
 import userPageImage from '../../assets/userPageImage.png'
 import logo from '../../assets/logo.png'
 
@@ -10,9 +11,32 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('Registrado:', { email, password })
+
+    try {
+      const response = await achetetepese.post({
+        endpoint: '/auth/register',
+        body: {
+          email,
+          password
+        },
+        credentials: 'include'
+      })
+
+      const data = await response.json();
+
+      if(!response.ok || !data.success){
+        console.error('Error al registrarse')
+        console.table(data)
+        return;
+      }
+      console.table(data)
+      navigate('/login')
+    } catch (error) {
+      console.log('Error al regisrarse', error.message)
+    }
   }
 
   return (

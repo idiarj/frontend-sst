@@ -63,7 +63,8 @@ class Fetch{
     }
 }
 
+const localhostUrl = 'http://localhost:3000';
+const productionUrl = 'https://backend-sst.onrender.com';
 
-
-export const achetetepese = new Fetch('https://backend-sst.onrender.com');
+export const achetetepese = new Fetch(localhostUrl);
 

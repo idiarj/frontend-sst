@@ -1,24 +1,41 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaIdCard } from 'react-icons/fa'
-import { validarCedula } from '../../utils/validarCedula'
+import { achetetepese } from '../../utils/fetch.js'
 import userPageImage from '../../assets/userPageImage.png'
 import logo from '../../assets/logo.png'
 
 
 function VerifyIdCard() {
-  const [cedula, setCedula] = useState('')
+  const [id_cardNumber, setCedula] = useState('')
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
-    const esValida = await validarCedula(cedula)
-    if (esValida) {
-      navigate('/register2')
-    } else {
-      setError('Cédula no válida. Intente nuevamente.')
+    try {
+      const response = await achetetepese.post({
+        endpoint: '/auth/verifyIdCard',
+        body: { id_cardNumber },
+        credentials: 'include',
+      })
+
+      console.log(response)
+
+      const data = await response.json();
+      console.table(data)
+      if(!response.ok || !data.success) {
+        console.error('Error al verificar la cédula:', data.error)
+        setError(data.error || 'Ocurrió un error al verificar la cédula. Por favor, inténtalo de nuevo.')
+        return
+      }
+
+      console.log('Cédula verificada exitosamente.');
+      navigate('/register')
+
+    } catch (error) {
+      console.error('Error al verificar la cédula:', error)
     }
   }
 
@@ -80,7 +97,7 @@ function VerifyIdCard() {
                 <input
                   type="text"
                   placeholder="Cédula"
-                  value={cedula}
+                  value={id_cardNumber}
                   onChange={(e) => setCedula(e.target.value)}
                   required
                   style={{ flex: 1, border: 'none', outline: 'none', fontSize: 14 }}
