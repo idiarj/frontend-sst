@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { FaIdCard, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
 import userPageImage from '../assets/userPageImage.png'
 import logo from '../assets/logo.png'
-import { users } from './users.js'
 import { achetetepese } from '../utils/fetch.js'
 import { modernInputStyle } from './modernInputStyle.js'
 
