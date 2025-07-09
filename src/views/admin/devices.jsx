@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import HeadBrand from '../../components/headBrand';
 import { fetchMockReport } from './fetchMockReport';
 import logoMini from '../../assets/logoMini.png';
+import NavMenu from '../../components/navMenu';
 import Report from '../../components/report';
+import { MdHeight } from 'react-icons/md';
 
 function Devices() {
   // Para varios reportes, simula un array (en el futuro puede venir de la API)
@@ -52,8 +54,10 @@ function Devices() {
   };
 
   return (
-    <div style={{ fontFamily: 'Inter, sans-serif', backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
-       <h1> hola mundo </h1>
+    <div style={{ fontFamily: 'Inter, sans-serif', backgroundColor: '#f5f5f5', minHeight: '100vh'}}>
+              <div style={{ height: 45 }} />
+      <NavMenu/>
+      <h1> hola mundo </h1>
     </div>
   );
 }

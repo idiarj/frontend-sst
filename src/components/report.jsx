@@ -246,7 +246,7 @@ const Report = ({ report, status, responseLevel, onChange, setStatus, setRespons
       <div style={{ display: 'flex', gap: 16, marginBottom: 20, marginRight: 25, justifyContent: 'space-between' }}>
         { [
           { key: 'asistencia', label: 'Asistencia Tecnica' },
-          { key: 'revision', label: 'Revision y/o Mantenimineto' },
+          { key: 'revision', label: 'Revision' },
           { key: 'instalacion', label: 'Instalar y/o Reinstalar' },
           { key: 'respaldo', label: 'Copia De Seguridad' },
           { key: 'medio', label: 'Medio Fisico' }
