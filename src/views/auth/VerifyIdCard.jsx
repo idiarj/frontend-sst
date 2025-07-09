@@ -15,11 +15,19 @@ function VerifyIdCard() {
     e.preventDefault()
     setError('')
     try {
+
       const response = await achetetepese.post({
         endpoint: '/auth/verifyIdCard',
         body: { id_cardNumber },
-        credentials: 'include',
+        credentials: 'include'
       })
+
+      // const response = await fetch('http://localhost:3000/auth/verifyIdCard', {
+      //   method: 'POST',
+      //   headers: {'Content-Type': 'application/json'},
+      //   body: JSON.stringify({ id_cardNumber }),
+      //   credentials: 'include' // Asegúrate de enviar las cookies
+      // });
 
       console.log(response)
 

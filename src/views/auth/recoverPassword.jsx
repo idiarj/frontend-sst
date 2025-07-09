@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaEnvelope } from 'react-icons/fa'
+import { achetetepese } from '../../utils/fetch.js'
 import userPageImage from '../../assets/userPageImage.png'
 import logo from '../../assets/logo.png'
-import { validarCorreo } from '../../utils/validarCorreo'
+
 
 function RecoverPassword() {
   const [email, setEmail] = useState('')
@@ -14,11 +15,35 @@ function RecoverPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
-    const esValido = await validarCorreo(email)
-    if (esValido) {
+    try {
+      const response = await achetetepese.post({
+        endpoint: '/auth/forgot-password',
+        body: { email },
+        credentials: 'include'
+      })
+
+      // const response = await fetch('http://localhost:3000/auth/recoverPassword', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ email }),
+      //   credentials: 'include' // Asegúrate de enviar las cookies
+      // })
+
+      const data = await response.json()
+      console.table(data)
+
+      if (!response.ok || !data.success) {
+        console.error('Error al enviar el correo:', data.error)
+        setError(data.error || 'Ocurrió un error al enviar el correo. Por favor, inténtalo de nuevo.')
+        return
+      }
+
       setEnviado(true)
-    } else {
-      setError('Correo no válido. Intente nuevamente.')
+      console.log('Correo enviado exitosamente.')
+    } catch (error) {
+      console.error('Error al enviar el correo:', error)
+      setError('Ocurrió un error al enviar el correo. Por favor, inténtalo de nuevo.')
+      return
     }
   }
 

@@ -25,6 +25,13 @@ function Register() {
         credentials: 'include'
       })
 
+      // const response = await fetch('http://localhost:3000/auth/register', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ email, password }),
+      //   credentials: 'include' // Asegúrate de enviar las cookies
+      // })
+
       const data = await response.json();
 
       if(!response.ok || !data.success){

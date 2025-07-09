@@ -1,17 +1,35 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
+import { achetetepese } from '../../utils/fetch.js'
 import userPageImage from '../../assets/userPageImage.png'
 import logo from '../../assets/logo.png'
 
 function NewPassword() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
+  const token = searchParams.get('token')
 
-  const handleSubmit = (e) => {
+  console.log(token)
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-        console.log('Nueva contraseña:', password)
+    console.log('Nueva contraseña:', password)
+
+    try {
+      const response = await achetetepese.post({
+      endpoint: '/auth/reset-password',
+      body: { password },
+      credentials: 'include'
+    }) 
+
+    //if()
+    } catch (error) {
+      console.error('Error al cambiar la contraseña:', error)
+    }
+
   }
 
   return (
