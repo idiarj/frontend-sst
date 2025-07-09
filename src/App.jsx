@@ -15,24 +15,27 @@ import SendReport from './views/user/sendReport.jsx'
 function App() {
   const cintilloHeight = 80;
 
+
   return (
     <Router>
       <HeadBrand />
-      <div className="app-welcome" style={{ paddingTop: cintilloHeight }}>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/verify-id" element={<VerifyIdCard />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/recoverpassword" element={<RecoverPassword />} />
-          <Route path="/newpassword" element={<NewPassword />} />
-          <Route path="/admin/devices" element={<Devices />} />
-          <Route path="/admin/reports" element={<Reports />} />
-          <Route path="/plans" element={<Plans />} />
-          <Route path="/payments" element={<Payments />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/user/sendreport" element={<SendReport />} />
-          <Route path="*" element={<Navigate to="/login" replace />} />
-        </Routes>
+      <div style={{ background: '#f5f5f5', minHeight: '100vh' }}>
+        <div className="app-welcome" style={{ paddingTop: cintilloHeight }}>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/verify-id" element={<VerifyIdCard />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/recoverpassword" element={<RecoverPassword />} />
+            <Route path="/newpassword" element={<NewPassword />} />
+            <Route path="/admin/devices" element={<Devices />} />
+            <Route path="/admin/reports" element={<Reports />} />
+            <Route path="/plans" element={<Plans />} />
+            <Route path="/payments" element={<Payments />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/user/sendreport" element={<SendReport />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   )
