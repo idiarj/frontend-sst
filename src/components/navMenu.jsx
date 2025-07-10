@@ -39,7 +39,7 @@ const NavMenu = () => {
 const navContainer = {
   backgroundColor: '#3c558a',
   padding: '10px 20px',
-  position: 'relative',
+  width: '100%',  
 };
 
 const navList = {

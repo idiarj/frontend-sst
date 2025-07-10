@@ -51,9 +51,9 @@ function Reports() {
   return (
     <div style={{ fontFamily: 'Inter, sans-serif', backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
       <HeadBrand />
-      <div style={{ height: 45 }} />
+      <div style={{ height: 47 }} />
             <NavMenu />
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '32px 0 0 32px', marginBottom: 12, paddingTop: 100 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '32px 0 0 32px', marginBottom: 12, paddingTop: 20 }}>
         <span style={{ fontWeight: 700, fontSize: 22, letterSpacing: 1, display: 'flex', alignItems: 'center', gap: 10 }}>
           <img src={logoMini} alt="Logo mini" style={{ height: 36, marginRight: 8 }} />
           ENTRADA DE SOLICITUD DE REPORTES

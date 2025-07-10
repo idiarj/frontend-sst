@@ -4,7 +4,7 @@ import NavMenu from '../../components/navMenu';
 const Plans = () => {
   return (
     <div style={{ fontFamily: 'Inter, sans-serif', backgroundColor: '#f5f5f5', minHeight: '100vh'}}>
-              <div style={{ height: 45 }} />
+              <div style={{ height: 47 }} />
       <NavMenu/>
             <h2>Plan</h2>
 

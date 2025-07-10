@@ -55,7 +55,7 @@ function Devices() {
 
   return (
     <div style={{ fontFamily: 'Inter, sans-serif', backgroundColor: '#f5f5f5', minHeight: '100vh'}}>
-              <div style={{ height: 45 }} />
+              <div style={{ height: 47 }} />
       <NavMenu/>
       <h1> hola mundo </h1>
     </div>

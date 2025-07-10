@@ -4,7 +4,7 @@ import NavMenu from '../../components/navMenu';
 const Payments = () => {
   return (
   <div style={{ fontFamily: 'Inter, sans-serif'}}>
-              <div style={{ height: 45 }} />
+              <div style={{ height: 47 }} />
       <NavMenu/>
       <h2>Gastos</h2>
       <p>Pantalla de gestión de gastos (Payments).</p>
