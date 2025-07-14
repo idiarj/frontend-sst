@@ -3,20 +3,13 @@ import HeadBrand from '../../components/headBrand';
 import NavMenu from '../../components/navMenu';
 import Report from '../../components/report';
 import mockData from './mockData.json';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { FaBuilding, FaLaptop } from 'react-icons/fa';
 import { MdLocationCity } from 'react-icons/md';
 
-// Icono personalizado para Leaflet
-const defaultIcon = new L.Icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-});
-
 const containerStyle = { width: '100%', height: '400px' };
+
+const defaultCenter = { lat: 10.6545, lng: -71.6406 };
 
 function Devices() {
   const [selectedSede, setSelectedSede] = useState(null);
@@ -90,24 +83,22 @@ function Devices() {
               </div>
             </div>
           ) : (
-            <MapContainer center={{ lat: 10.6545, lng: -71.6406 }} zoom={10} style={containerStyle}>
-              <TileLayer
-                attribution="&copy; OpenStreetMap"
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              {mockData.sedes.map((sede) => (
-                <Marker
-                  key={sede.id}
-                  position={{ lat: sede.lat, lng: sede.lng }}
-                  icon={defaultIcon}
-                  eventHandlers={{
-                    click: () => handleSedeClick(sede),
-                  }}
-                >
-                  <Popup>{sede.nombre}</Popup>
-                </Marker>
-              ))}
-            </MapContainer>
+            <LoadScript googleMapsApiKey="AIzaSyCaUJzPG1Z0pFosuRhrAY0_TooCjWc8sn0">
+              <GoogleMap mapContainerStyle={containerStyle} center={defaultCenter} zoom={10}>
+                {mockData.sedes.map((sede) => (
+                  <Marker
+                    key={sede.id}
+                    position={{ lat: sede.lat, lng: sede.lng }}
+                    onClick={() => handleSedeClick(sede)}
+                    icon={{
+                      url: selectedSede?.id === sede.id
+                        ? 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                        : 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                    }}
+                  />
+                ))}
+              </GoogleMap>
+            </LoadScript>
           )}
           <button onClick={() => setShowDiagram(!showDiagram)} style={{ marginTop: 10 }}>
             {showDiagram ? 'Ver en Mapa' : 'Ver en Diagrama'}
