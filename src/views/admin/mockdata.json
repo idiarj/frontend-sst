@@ -1,0 +1,30 @@
+{
+  "sedes": [
+    {
+      "id": "s1",
+      "nombre": "Ministerio del Poder Popular de Petróleo",
+      "lat": 10.6545,
+      "lng": -71.6406,
+      "oficinas": [
+        {
+          "id": "o1",
+          "nombre": "Oficina 01",
+          "dispositivos": [
+            {
+              "id": "d01",
+              "nombre": "Dispositivo 01",
+              "tipo": "Laptop",
+              "estado": "EN PROCESO",
+              "usuario": "Simón",
+              "cedula": "18045239",
+              "cargo": "Asistente",
+              "departamento": "RRHH",
+              "observaciones": "Parpadeos constantes",
+              "solucion": "Diagnóstico pendiente"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

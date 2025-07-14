@@ -4,6 +4,8 @@
   - Usar unidades absolutas (px)
   - Evitar flex/grid responsivo
 */
+@import "leaflet/dist/leaflet.css";
+
 
 html, body {
   width: 100vw;
