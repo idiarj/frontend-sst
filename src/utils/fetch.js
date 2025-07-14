@@ -8,7 +8,7 @@ class Fetch{
     }
 
 
-    async post({endpoint, body, credentials, headers = {'Content-Type': 'application/json'},}){
+    async post({endpoint, body = {}, credentials, headers = {'Content-Type': 'application/json'},}){
         try {
             const completeUrl = this.baseUrl + endpoint
             console.log(`Making POST request to: ${completeUrl}`);
@@ -32,7 +32,7 @@ class Fetch{
         }
     }
 
-    async put({endpoint, body, credentials, headers = {'Content-Type': 'application/json'},}){
+    async put({endpoint, body = {}, credentials, headers = {'Content-Type': 'application/json'},}){
         try {
             const completeUrl = this.baseUrl + endpoint
             console.log(`Making PUT request to: ${completeUrl}`);
@@ -52,7 +52,7 @@ class Fetch{
         }
     }
 
-    async patch({endpoint, body, credentials, headers = {'Content-Type': 'application/json'},}){
+    async patch({endpoint, body = {}, credentials, headers = {'Content-Type': 'application/json'},}){
         try {
             const completeUrl = this.baseUrl + endpoint
             console.log(`Making PATCH request to: ${completeUrl}`);
@@ -63,7 +63,7 @@ class Fetch{
     }
 }
 
-const localhostUrl = 'http://192.168.71.142:3000';
+const localhostUrl = 'http://localhost:3000';
 const productionUrl = 'https://backend-sst.onrender.com';
 
 export const achetetepese = new Fetch(localhostUrl);

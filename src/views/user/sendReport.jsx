@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { achetetepese } from '../../utils/fetch.js'
 import logoMini from '../../assets/logoMini.png'
 import HeadBrand from '../../components/headBrand'
+
 
 function SendReport() {
   const usuario = {
@@ -18,6 +21,8 @@ function SendReport() {
     descripcion: ''
   })
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm(prev => ({ ...prev, [name]: value }))
@@ -28,9 +33,24 @@ function SendReport() {
     console.log(form)
   }
 
-  const handleLogout = () => {
-    localStorage.removeItem('role')
-    window.location.href = '/login'
+  const handleLogout = async () => {
+    try {
+      const response = await achetetepese.post({
+        endpoint: '/auth/logout',
+        credentials: 'include'
+      })
+
+      const data = await response.json();
+
+      if(!response.ok || !data.success){
+        console.error('Error al hacer login, por favor intenta de nuevo.');
+        console.error(data.error)
+        return       
+      }
+      navigate(`/login`)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
