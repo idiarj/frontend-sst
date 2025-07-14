@@ -8,7 +8,7 @@ import NewPassword from "../views/auth/newPassword";
 import Devices from "../views/admin/devices";
 import Reports from "../views/admin/reports";
 import Plans from "../views/admin/plans";
-import Payments from "../views/ad min/payments";
+import Payments from "../views/admin/payments";
 import Settings from "../views/admin/settings";
 import SendReport from "../views/user/sendReport";
 
