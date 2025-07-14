@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import HeadBrand from './components/headBrand'
 import Login from './views/auth/login.jsx'
 import VerifyIdCard from './views/auth/VerifyIdCard.jsx'
-import Register from './views/auth/register.jsx'
+import Register from './views/auth/Register.jsx'
 import RecoverPassword from './views/auth/recoverPassword.jsx'
 import NewPassword from './views/auth/newPassword.jsx'
 import Devices from './views/admin/devices.jsx'
