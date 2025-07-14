@@ -10,20 +10,19 @@ function Reports() {
   const [reports, setReports] = useState([]);
   const [statuses, setStatuses] = useState([]);
   const [responseLevels, setResponseLevels] = useState([]);
-  const [filters, setFilters] = useState({
-    fecha: '',
-    numero: '',
-    estado: '',
-    cedula: '',
-  });
+
+  // Estados para dos filtros
+  const [filterField1, setFilterField1] = useState('fecha');
+  const [filterValue1, setFilterValue1] = useState('');
+  const [filterField2, setFilterField2] = useState('estado');
+  const [filterValue2, setFilterValue2] = useState('');
 
   useEffect(() => {
     fetchMockReport().then(data => {
       const base = data;
       const fakeReports = [
         { ...base.datos_personales, ...base, ...{ id: '001' } },
-        { ...base.datos_personales, ...base, ...{ id: '002', nombre: 'Maria', cedula: '18045240', dispositivo: '003', estado: 'PENDIENTE', nivel_respuesta: 'MEDIA', tecnico: 'JUAN',  "fecha": "2025-07-07",
-} },
+        { ...base.datos_personales, ...base, ...{ id: '002', nombre: 'Maria', cedula: '18045240', dispositivo: '003', estado: 'PENDIENTE', nivel_respuesta: 'MEDIA', tecnico: 'JUAN', fecha: '2025-07-07' } },
       ];
       setReports(fakeReports);
       setStatuses(fakeReports.map(r => r.estado || 'PENDIENTE'));
@@ -56,18 +55,51 @@ function Reports() {
     setReports(prev => prev.map((r, i) => i === idx ? { ...r, nivel_respuesta: level } : r));
   };
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prev) => ({ ...prev, [name]: value }));
-  };
+  // Handlers para los dos filtros
+  const handleField1Change = (e) => setFilterField1(e.target.value);
+  const handleValue1Change = (e) => setFilterValue1(e.target.value);
+  const handleField2Change = (e) => setFilterField2(e.target.value);
+  const handleValue2Change = (e) => setFilterValue2(e.target.value);
 
-  // Filtrar los reportes según los filtros
+  // Filtrar los reportes según ambos filtros
   const filteredReports = reports.filter((report) => {
-    const matchFecha = filters.fecha ? (report.fecha || '').includes(filters.fecha) : true;
-    const matchNumero = filters.numero ? (report.id || '').toString().includes(filters.numero) : true;
-    const matchEstado = filters.estado ? (report.estado || '').toLowerCase().includes(filters.estado.toLowerCase()) : true;
-    const matchCedula = filters.cedula ? (report.cedula || '').toString().includes(filters.cedula) : true;
-    return matchFecha && matchNumero && matchEstado && matchCedula;
+    const value1 = filterValue1.toLowerCase();
+    const value2 = filterValue2.toLowerCase();
+    let match1 = true;
+    let match2 = true;
+    switch (filterField1) {
+      case 'fecha':
+        match1 = (report.fecha || '').toLowerCase().includes(value1);
+        break;
+      case 'numero':
+        match1 = (report.id || '').toString().toLowerCase().includes(value1);
+        break;
+      case 'estado':
+        match1 = (report.estado || '').toLowerCase().includes(value1);
+        break;
+      case 'cedula':
+        match1 = (report.cedula || '').toString().toLowerCase().includes(value1);
+        break;
+      default:
+        match1 = true;
+    }
+    switch (filterField2) {
+      case 'fecha':
+        match2 = (report.fecha || '').toLowerCase().includes(value2);
+        break;
+      case 'numero':
+        match2 = (report.id || '').toString().toLowerCase().includes(value2);
+        break;
+      case 'estado':
+        match2 = (report.estado || '').toLowerCase().includes(value2);
+        break;
+      case 'cedula':
+        match2 = (report.cedula || '').toString().toLowerCase().includes(value2);
+        break;
+      default:
+        match2 = true;
+    }
+    return match1 && match2;
   });
 
   return (
@@ -75,12 +107,21 @@ function Reports() {
       <HeadBrand />
       <div style={{ height: 47 }} />
       <NavMenu />
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '32px 0 0 32px', marginBottom: 12, paddingTop: 20, justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingRight: 250,padding:10, marginBottom: 12, paddingTop: 20, justifyContent: 'space-between' }}>
         <span style={{ fontWeight: 700, fontSize: 22, letterSpacing: 1, display: 'flex', alignItems: 'center', gap: 10 }}>
           <img src={logoMini} alt="Logo mini" style={{ height: 36, marginRight: 8 }} />
           ENTRADA DE SOLICITUD DE REPORTES
         </span>
-        <SearchBar filters={filters} onChange={handleFilterChange} />
+        <SearchBar
+          filterField1={filterField1}
+          filterValue1={filterValue1}
+          onField1Change={handleField1Change}
+          onValue1Change={handleValue1Change}
+          filterField2={filterField2}
+          filterValue2={filterValue2}
+          onField2Change={handleField2Change}
+          onValue2Change={handleValue2Change}
+        />
       </div>
       <div style={{ padding: '24px 20px 40px', maxWidth: 1200, margin: '0 auto' }}>
         {filteredReports.map((report, idx) => (
