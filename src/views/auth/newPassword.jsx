@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
 import { achetetepese } from '../../utils/fetch.js'
@@ -14,18 +14,39 @@ function NewPassword() {
 
   console.log(token)
 
+  useEffect(()=>{
+    if(!token){
+      navigate('/login')
+    }
+  })
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('Nueva contraseña:', password)
 
     try {
       const response = await achetetepese.post({
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
       endpoint: '/auth/reset-password',
-      body: { password },
+      body: { newPassword: password },
       credentials: 'include'
     }) 
 
-    //if()
+    const data = await response.json()
+
+    if(!response.ok || !data.success){
+      console.error('Error al cambiar la contrasena')
+      console.table(data)
+      return;
+    }
+
+    console.log('Cambio de contrasena exitoso.')
+
+    navigate('/login')
+
     } catch (error) {
       console.error('Error al cambiar la contraseña:', error)
     }
