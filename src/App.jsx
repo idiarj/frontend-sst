@@ -14,14 +14,7 @@ import SendReport from './views/user/sendReport.jsx'
 
 function App() {
   const cintilloHeight = 80;
-
-
-  return (
-    <Router>
-      <HeadBrand />
-      <div style={{ background: '#f5f5f5', minHeight: '100vh' }}>
-        <div className="app-welcome" style={{ paddingTop: cintilloHeight }}>
-          <Routes>
+            <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/verify-id" element={<VerifyIdCard />} />
             <Route path="/register" element={<Register />} />
@@ -35,6 +28,13 @@ function App() {
             <Route path="/user/sendreport" element={<SendReport />} />
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
+
+  return (
+    <Router>
+      <HeadBrand />
+      <div style={{ background: '#f5f5f5', minHeight: '100vh' }}>
+        <div className="app-welcome" style={{ paddingTop: cintilloHeight }}>
+
         </div>
       </div>
     </Router>
