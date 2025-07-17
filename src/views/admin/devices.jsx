@@ -3,7 +3,6 @@ import HeadBrand from '../../components/headBrand';
 import NavMenu from '../../components/navMenu';
 import Report from '../../components/report';
 import mockData from './mockData.json';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { FaBuilding, FaLaptop } from 'react-icons/fa';
 import { MdLocationCity } from 'react-icons/md';
 
@@ -58,51 +57,29 @@ function Devices() {
           ))}
         </div>
 
-        {/* Centro: mapa o diagrama */}
+        {/* Centro: solo diagrama, sin mapa */}
         <div style={{ flex: 1 }}>
-          {showDiagram ? (
-            <div style={{ padding: 20, background: '#fff', borderRadius: 8 }}>
-              <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
-                {mockData.sedes.map((sede) => (
-                  <div key={sede.id}>
-                    <MdLocationCity size={40} />
-                    <div style={{ fontWeight: 'bold' }}>{sede.nombre}</div>
-                    {sede.oficinas.map((ofi) => (
-                      <div key={ofi.id}>
-                        <FaBuilding size={30} />
-                        <div>{ofi.nombre}</div>
-                        {ofi.dispositivos.map((dev) => (
-                          <div key={dev.id} onClick={() => handleDispositivoClick(dev)} style={{ cursor: 'pointer', marginLeft: 20 }}>
-                            <FaLaptop size={20} /> {dev.nombre}
-                          </div>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
+          <div style={{ padding: 20, background: '#fff', borderRadius: 8 }}>
+            <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+              {mockData.sedes.map((sede) => (
+                <div key={sede.id}>
+                  <MdLocationCity size={40} />
+                  <div style={{ fontWeight: 'bold' }}>{sede.nombre}</div>
+                  {sede.oficinas.map((ofi) => (
+                    <div key={ofi.id}>
+                      <FaBuilding size={30} />
+                      <div>{ofi.nombre}</div>
+                      {ofi.dispositivos.map((dev) => (
+                        <div key={dev.id} onClick={() => handleDispositivoClick(dev)} style={{ cursor: 'pointer', marginLeft: 20 }}>
+                          <FaLaptop size={20} /> {dev.nombre}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
-          ) : (
-            <LoadScript googleMapsApiKey="AIzaSyCaUJzPG1Z0pFosuRhrAY0_TooCjWc8sn0">
-              <GoogleMap mapContainerStyle={containerStyle} center={defaultCenter} zoom={10}>
-                {mockData.sedes.map((sede) => (
-                  <Marker
-                    key={sede.id}
-                    position={{ lat: sede.lat, lng: sede.lng }}
-                    onClick={() => handleSedeClick(sede)}
-                    icon={{
-                      url: selectedSede?.id === sede.id
-                        ? 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-                        : 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-                    }}
-                  />
-                ))}
-              </GoogleMap>
-            </LoadScript>
-          )}
-          <button onClick={() => setShowDiagram(!showDiagram)} style={{ marginTop: 10 }}>
-            {showDiagram ? 'Ver en Mapa' : 'Ver en Diagrama'}
-          </button>
+          </div>
         </div>
 
         {/* Panel derecho: Reporte */}
