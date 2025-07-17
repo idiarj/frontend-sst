@@ -28,8 +28,11 @@ export const router = createBrowserRouter([
         { path: '/payments', element: <Payments /> },
         { path: '/settings', element: <Settings /> },
         { path: '/user/sendreport', element: <SendReport /> },
-        { path: '*', element: <Navigate to="/login" replace /> },
-        {}
-            ]
-    }
+        { path: '/', element: <Navigate to="/login" replace /> },
+        ]
+    },
+    // {
+    //     path: '*',
+    //     element: <Navigate to="/login" replace />
+    // }
 ])
