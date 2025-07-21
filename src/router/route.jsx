@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import { achetetepese } from "../utils/fetch";
 import AppLayout from "../layout/AppLayout";
 import Login from "../views/auth/login";
 import VerifyIdCard from "../views/auth/VerifyIdCard";
@@ -27,7 +28,13 @@ export const router = createBrowserRouter([
         { path: '/plans', element: <Plans /> },
         { path: '/payments', element: <Payments /> },
         { path: '/settings', element: <Settings /> },
-        { path: '/user/sendreport', element: <SendReport /> },
+        { 
+            path: '/user/sendreport', 
+            element: <SendReport />,
+            loader: async ()=>{
+                
+            }
+             },
         { path: '/', element: <Navigate to="/login" replace /> },
         ]
     },
