@@ -25,7 +25,7 @@ const NavMenu = () => {
             Gastos
           </NavLink>
         </li>
-        <li style={{ marginLeft: 'auto' }}>
+        <li style={{ marginLeft: 900 }}>
           <NavLink to="/settings" style={getLinkStyle}>
             Configuracion
           </NavLink>
@@ -39,7 +39,13 @@ const NavMenu = () => {
 const navContainer = {
   backgroundColor: '#3c558a',
   padding: '10px 20px',
-  width: '100%',  
+  width: '100vw',
+  position: 'fixed',
+  top: 47, 
+  left: 0,
+  zIndex: 1100,
+  marginTop: '79px',
+  boxShadow: '0 2px 8px #0001'
 };
 
 const navList = {
