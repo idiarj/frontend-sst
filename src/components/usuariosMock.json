@@ -1,0 +1,6 @@
+[
+  { "cedula": "987654321", "nombre": "Simon Perez", "rol": "usuario" },
+  { "cedula": "123456789", "nombre": "Maria Lopez", "rol": "admin" },
+  { "cedula": "456789123", "nombre": "Juan Garcia", "rol": "usuario" },
+  { "cedula": "789123456", "nombre": "Ana Torres", "rol": "usuario" }
+]

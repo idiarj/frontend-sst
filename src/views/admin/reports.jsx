@@ -3,7 +3,7 @@ import HeadBrand from '../../components/headBrand';
 import { fetchMockReport } from './fetchMockReport';
 import logoMini from '../../assets/logoMini.png';
 import Report from '../../components/report';
-import NavMenu from '../../components/navMenu';
+// import NavMenu eliminado, ahora está en HeadBrand
 import SearchBar from '../../components/searchBar';
 
 function Reports() {
@@ -106,7 +106,7 @@ function Reports() {
     <div style={{ fontFamily: 'Inter, sans-serif', backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
       <HeadBrand />
       <div style={{ height: 47 }} />
-      <NavMenu />
+      {/* NavMenu ahora está dentro de HeadBrand */}
       <div style={{ marginTop: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, paddingRight: 250, padding: 10, marginBottom: 8, justifyContent: 'space-between' }}>
           <span style={{ fontWeight: 700, fontSize: 22, letterSpacing: 1, display: 'flex', alignItems: 'center', gap: 10 }}>

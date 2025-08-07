@@ -1,8 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
-import NavMenu from '../../components/navMenu';
+// import NavMenu eliminado, ahora está en HeadBrand
 import HeadBrand from '../../components/headBrand';
 import mockData from './mockData.json';
+import { MdOutlineNoteAlt, MdOutlineHome } from 'react-icons/md';
+import { IoMdPerson } from 'react-icons/io';
 
 const productosInventados = [
   {
@@ -57,24 +59,24 @@ const Payments = () => {
     <div style={{ fontFamily: 'Inter, sans-serif', background: '#f4f6fa', minHeight: '100vh' }}>
       <HeadBrand />
       {/* Elimino el espacio extra superior para que el navMenu quede más arriba */}
-      <NavMenu />
+      {/* NavMenu ahora está dentro de HeadBrand */}
       <div style={{ maxWidth: 1400, margin: '0 auto', padding: '32px 16px' }}>
         <h2 style={{ textAlign: 'center', fontWeight: 700, fontSize: 28, marginBottom: 24, marginTop: 90 }}>Presupuestos estimados</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, justifyContent: 'center' }}>
           {reportes.map((r, i) => (
             <div key={r.id} style={{ background: '#f7f7fa', borderRadius: 24, boxShadow: '0 2px 12px #0002', padding: 28, minWidth: 380, maxWidth: 420, flex: '1 1 380px', marginBottom: 24 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 22, fontWeight: 'bold', marginBottom: 18 }}>
-                <span role="img" aria-label="reporte" style={{ fontSize: 28 }}>📝</span>
+                <MdOutlineNoteAlt size={28} style={{ color: '#2f4b8b' }} />
                 REPORTE #{r.id.toString().padStart(3, '0')}
               </div>
               <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
-                <span role="img" aria-label="user" style={{ fontSize: 18 }}>👤</span>
+                <IoMdPerson size={22} style={{ color: '#2f4b8b' }} />
                 <span style={{ background: '#fff', borderRadius: 12, padding: '4px 14px', fontWeight: 500 }}>{r.nombre}</span>
                 <span style={{ background: '#fff', borderRadius: 12, padding: '4px 14px', fontWeight: 500 }}>{r.cedula}</span>
                 <span style={{ background: '#fff', borderRadius: 12, padding: '4px 14px', fontWeight: 500 }}>{r.cargo}</span>
               </div>
               <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
-                <span role="img" aria-label="departamento" style={{ fontSize: 18 }}>🏢</span>
+                <MdOutlineHome size={20} style={{ color: '#2f4b8b' }} />
                 <span style={{ background: '#fff', borderRadius: 12, padding: '4px 14px', fontWeight: 500 }}>{r.departamento}</span>
                 <span style={{ background: '#fff', borderRadius: 12, padding: '4px 14px', fontWeight: 500 }}>{r.oficina}</span>
                 <span style={{ background: '#fff', borderRadius: 12, padding: '4px 14px', fontWeight: 500 }}>#{r.dispositivo}</span>

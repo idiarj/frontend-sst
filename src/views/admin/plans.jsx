@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavMenu from '../../components/navMenu';
+// import NavMenu eliminado, ahora está en HeadBrand
 import mockData from './mockData.json';
 import { FaBuilding, FaLaptop } from 'react-icons/fa';
 import { MdLocationCity } from 'react-icons/md';
@@ -130,8 +130,8 @@ const Plans = () => {
   return (
     <div style={styles.page}>
       <div style={{ height: 47 }} />
-      <NavMenu />
-      <div style={styles.main}>
+      {/* NavMenu ahora está dentro de HeadBrand */}
+      <div style={{ ...styles.main, marginTop: 20 }}>
         {/* Sidebar igual a Devices */}
         <div style={styles.sidebar}>
           <strong style={{ fontSize: 20, marginBottom: 12 }}>Sedes</strong>
