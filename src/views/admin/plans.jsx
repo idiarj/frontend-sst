@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 // import NavMenu eliminado, ahora está en HeadBrand
-import mockData from './mockData.json';
 import { FaBuilding, FaLaptop } from 'react-icons/fa';
 import { MdLocationCity } from 'react-icons/md';
 

@@ -1,7 +1,6 @@
  import React, { useState } from 'react';
 import HeadBrand from '../../components/headBrand';
 import Report from '../../components/report';
-import mockData from './mockdata.json';
 import { FaBuilding, FaLaptop } from 'react-icons/fa';
 import { MdLocationCity } from 'react-icons/md';
 
