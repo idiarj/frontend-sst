@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import mockReport from './mockReport.json';
 import usuariosMock from '../../components/usuariosMock.json';
 // import NavMenu eliminado, ahora está en HeadBrand
 
 const Settings = () => {
+  const navigate = useNavigate();
   // UI states (sin lógica real)
   const [cintilloPreview, setCintilloPreview] = useState(null);
   const [cedulaBuscar, setCedulaBuscar] = useState('');
@@ -75,7 +77,12 @@ const Settings = () => {
           </div>
           <div style={{ fontWeight: 600, fontSize: 20 }}>Elena Pacheco</div>
           <div style={{ fontSize: 16, marginBottom: 16 }}>ci 12345678</div>
-          <button style={{ background: 'none', color: '#fff', border: '1px solid #fff', borderRadius: 8, padding: '8px 16px', cursor: 'pointer', marginTop: 8 }}>Cambiar contraseña</button>
+          <button
+            style={{ background: 'none', color: '#fff', border: '1px solid #fff', borderRadius: 8, padding: '8px 16px', cursor: 'pointer', marginTop: 8 }}
+            onClick={() => navigate('/recoverpassword')}
+          >
+            Cambiar contraseña
+          </button>
         </div>
 
         {/* Panel principal */}
@@ -184,7 +191,7 @@ const Settings = () => {
           </div>
 
           {/* Agregar persona */}
-          <div style={{ marginTop: 32 }}>
+          <div style={{ marginTop: 32, maxWidth: 500 }}>
             <h3 style={{ marginBottom: 12 }}>Agregar persona</h3>
             <form
               style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'center' }}
@@ -195,10 +202,10 @@ const Settings = () => {
                   return;
                 }
                 setErrorAgregar('');
-                // Aquí iría la lógica para agregar persona
                 setNombre('');
                 setApellido('');
                 setCedula('');
+                setErrorAgregar('Persona agregada correctamente (solo frontend)');
               }}
             >
               <input
@@ -231,7 +238,7 @@ const Settings = () => {
               >
                 Agregar
               </button>
-              {errorAgregar && <span style={{ color: 'red', fontSize: 15, marginLeft: 8 }}>{errorAgregar}</span>}
+              {errorAgregar && <span style={{ color: errorAgregar.includes('correctamente') ? 'green' : 'red', fontSize: 15, marginLeft: 8 }}>{errorAgregar}</span>}
             </form>
           </div>
 
