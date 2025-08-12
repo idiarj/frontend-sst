@@ -3,7 +3,7 @@ import HeadBrand from '../../components/headBrand';
 import { fetchMockReport } from './fetchMockReport';
 import logoMini from '../../assets/logoMini.png';
 import Report from '../../components/report';
-import NavMenu from '../../components/navMenu';
+// import NavMenu eliminado, ahora está en HeadBrand
 import SearchBar from '../../components/searchBar';
 
 function Reports() {
@@ -106,22 +106,24 @@ function Reports() {
     <div style={{ fontFamily: 'Inter, sans-serif', backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
       <HeadBrand />
       <div style={{ height: 47 }} />
-      <NavMenu />
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingRight: 250,padding:10, marginBottom: 12, paddingTop: 20, justifyContent: 'space-between' }}>
-        <span style={{ fontWeight: 700, fontSize: 22, letterSpacing: 1, display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src={logoMini} alt="Logo mini" style={{ height: 36, marginRight: 8 }} />
-          ENTRADA DE SOLICITUD DE REPORTES
-        </span>
-        <SearchBar
-          filterField1={filterField1}
-          filterValue1={filterValue1}
-          onField1Change={handleField1Change}
-          onValue1Change={handleValue1Change}
-          filterField2={filterField2}
-          filterValue2={filterValue2}
-          onField2Change={handleField2Change}
-          onValue2Change={handleValue2Change}
-        />
+      {/* NavMenu ahora está dentro de HeadBrand */}
+      <div style={{ marginTop: 40 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, paddingRight: 250, padding: 10, marginBottom: 8, justifyContent: 'space-between' }}>
+          <span style={{ fontWeight: 700, fontSize: 22, letterSpacing: 1, display: 'flex', alignItems: 'center', gap: 10 }}>
+            <img src={logoMini} alt="Logo mini" style={{ height: 36, marginRight: 8 }} />
+            ENTRADA DE SOLICITUD DE REPORTES
+          </span>
+          <SearchBar
+            filterField1={filterField1}
+            filterValue1={filterValue1}
+            onField1Change={handleField1Change}
+            onValue1Change={handleValue1Change}
+            filterField2={filterField2}
+            filterValue2={filterValue2}
+            onField2Change={handleField2Change}
+            onValue2Change={handleValue2Change}
+          />
+        </div>
       </div>
       <div style={{ padding: '24px 20px 40px', maxWidth: 1200, margin: '0 auto' }}>
         {filteredReports.map((report, idx) => (
