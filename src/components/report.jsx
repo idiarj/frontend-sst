@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineIdcard, AiOutlinePaperClip } from 'react-icons/ai';
-import { MdOutlineNoteAlt, MdDevices, MdEngineering, MdOutlineHome } from 'react-icons/md';
+import { MdOutlineNoteAlt, MdDevices, MdOutlineHome } from 'react-icons/md';
 import { IoMdPerson } from 'react-icons/io';
 
 const InputWithIcon = ({ icon, name, placeholder, value, onChange, readOnly }) => (
@@ -225,7 +225,6 @@ const Report = ({ report, status, responseLevel, onChange, setStatus, setRespons
             <div style={{ flex: 1 }}>
               <div style={labelStyle}>Asignar Técnico</div>
               <div style={modernSelectWrapper}>
-                <MdEngineering size={24} style={{ marginRight: 4 }} />
                 <select
                   name="tecnico"
                   value={report.tecnico}
