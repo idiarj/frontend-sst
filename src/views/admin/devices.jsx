@@ -1,7 +1,6 @@
- import React, { useState } from 'react';
+import React, { useState } from 'react';
 import HeadBrand from '../../components/headBrand';
 import Report from '../../components/report';
-import mockData from './mockdata.json';
 import { FaBuilding, FaLaptop } from 'react-icons/fa';
 import { MdLocationCity } from 'react-icons/md';
 
@@ -242,7 +241,7 @@ function Devices() {
             alignItems: 'center',
             gap: 18,
             margin: '0 auto',
-            background: 'linear-gradient(120deg, #b3c8ff 60%, #e0e7ff 100%)', // color diferente para sede
+            background: "#e0e7ff",
           }}>
             <div style={{ ...styles.sedeTitle, fontSize: 20, marginBottom: 12 }}>
               <MdLocationCity size={26} /> {sedeUnica.nombre}
@@ -250,7 +249,7 @@ function Devices() {
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
               {sedeUnica.departamentos.map((dep) => (
                 <div key={dep.id} style={{
-                  background: 'linear-gradient(120deg, #e0e7ff 60%, #fff 100%)',
+                  background: '#fff',
                   borderRadius: 10,
                   boxShadow: '0 2px 8px #183d6a11',
                   padding: 10,
