@@ -12,6 +12,7 @@ class Fetch{
         try {
             const completeUrl = this.baseUrl + endpoint
             console.log(`Making POST request to: ${completeUrl}`);
+            console.log(body)
             return await fetch(completeUrl, {
                 method: 'POST',
                 headers, 

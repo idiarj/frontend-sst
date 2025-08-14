@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 // import NavMenu eliminado, ahora está en HeadBrand
 import HeadBrand from '../../components/headBrand';
-import mockData from './mockData.json';
+import mockData from './mockdata.json';
 import { MdOutlineNoteAlt, MdOutlineHome } from 'react-icons/md';
 import { IoMdPerson } from 'react-icons/io';
 

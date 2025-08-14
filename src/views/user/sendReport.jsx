@@ -28,9 +28,24 @@ function SendReport() {
     setForm(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(form)
+    try {
+      console.table(form)
+      console.log(form)
+      const response = await achetetepese.post({
+        endpoint: '/reports',
+        body: form
+      })
+
+      const data = await response.json();
+      console.table(data)
+      if(!data.success || !response.ok) {
+        throw new Error(data.error || 'Error desconocido');
+      }
+    } catch (error) {
+      console.error('Error al enviar el reporte:', error)
+    }
   }
 
   const handleLogout = async () => {
