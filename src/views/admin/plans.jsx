@@ -182,6 +182,10 @@ const Plans = () => {
   // Dispositivos seleccionados (si aplica)
   // const dispositivosSeleccionados = selectedDepartamento ? selectedDepartamento.dispositivos : [];
 
+  // Agrupación de departamentos
+  const zonaCentral4 = departamentos.slice(0, 4);
+  const otrosDepartamentos = departamentos.slice(4);
+
   return (
     <div style={styles.page}>
       <div style={{ height: 47 }} />
@@ -215,41 +219,72 @@ const Plans = () => {
 
         {/* Panel central: departamentos y historial de planes */}
         <div style={styles.mainPanel}>
-          <div style={{display: 'flex', gap: 32, flexWrap: 'wrap', justifyContent: 'center', width: '100%'}}>
-            <div style={{ background: '#e0e7ff', borderRadius: 12, boxShadow: '0 2px 8px #183d6a11', padding: 18, minWidth: 220, marginBottom: 18 }}>
-              <div style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 8, color: '#183d6a', display: 'flex', alignItems: 'center', gap: 8 }}>{sedeIcon} Sede Principal</div>
-              <div>
-                <div style={{ fontWeight: 600, fontSize: 16, margin: '10px 0 4px 0', color: '#2e4a7d', display: 'flex', alignItems: 'center', gap: 6 }}>
-                  Departamentos:
-                </div>
-                <div style={{display: 'flex', gap: 8, flexWrap: 'wrap', marginLeft: 18, marginBottom: 8}}>
-                  {departamentos.map(dep => (
-                    <button
-                      key={dep.nombre}
-                      onClick={() => setSelectedDepartamento(dep)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 4,
-                        background: selectedDepartamento && selectedDepartamento.nombre === dep.nombre ? '#e0e7ff' : '#fff',
-                        color: '#183d6a',
-                        fontWeight: 500,
-                        fontSize: 14,
-                        borderRadius: 6,
-                        padding: '2px 6px',
-                        boxShadow: '0 1px 4px #183d6a11',
-                        border: 'none',
-                        cursor: 'pointer',
-                        marginBottom: 4
-                      }}
-                    >
-                      {buildingIcon} {dep.nombre}
-                    </button>
-                  ))}
-                </div>
+          {/* Cuadro único de departamentos con encabezado y subtítulo */}
+          <div style={{ background: '#e0e7ff', borderRadius: 18, padding: '32px 0 24px 0', marginBottom: 24, width: '100%', maxWidth: 700, boxShadow: '0 2px 12px #183d6a22', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            {/* Encabezado centrado */}
+            <div style={{ fontWeight: 'bold', fontSize: 24, color: '#183d6a', marginBottom: 8, letterSpacing: 1, textAlign: 'center', width: '100%' }}>{sedeIcon} Sede Administrativa</div>
+            {/* Subtítulo alineado a la izquierda */}
+            <div style={{ fontWeight: 600, fontSize: 18, color: '#2e4a7d', marginBottom: 18, alignSelf: 'flex-start', marginLeft: 38 }}>Departamentos</div>
+            <div style={{ display: 'flex', gap: 32, width: '100%', justifyContent: 'center' }}>
+              {/* Columna 1 */}
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                {zonaCentral4.map(dep => (
+                  <button
+                    key={dep.nombre}
+                    onClick={() => setSelectedDepartamento(dep)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 4,
+                      background: '#fff',
+                      color: '#183d6a',
+                      fontWeight: selectedDepartamento && selectedDepartamento.nombre === dep.nombre ? 700 : 500,
+                      fontSize: 14,
+                      borderRadius: 6,
+                      padding: '10px 18px',
+                      boxShadow: selectedDepartamento && selectedDepartamento.nombre === dep.nombre ? '0 2px 8px #183d6a33' : '0 1px 4px #183d6a11',
+                      border: selectedDepartamento && selectedDepartamento.nombre === dep.nombre ? '2px solid #2e4a7d' : 'none',
+                      cursor: 'pointer',
+                      marginBottom: 12,
+                      width: '90%',
+                      transition: 'background 0.2s, border 0.2s'
+                    }}
+                  >
+                    {buildingIcon} {dep.nombre}
+                  </button>
+                ))}
+              </div>
+              {/* Columna 2 */}
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                {otrosDepartamentos.map(dep => (
+                  <button
+                    key={dep.nombre}
+                    onClick={() => setSelectedDepartamento(dep)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 4,
+                      background: '#fff',
+                      color: '#183d6a',
+                      fontWeight: selectedDepartamento && selectedDepartamento.nombre === dep.nombre ? 700 : 500,
+                      fontSize: 14,
+                      borderRadius: 6,
+                      padding: '10px 18px',
+                      boxShadow: selectedDepartamento && selectedDepartamento.nombre === dep.nombre ? '0 2px 8px #183d6a33' : '0 1px 4px #183d6a11',
+                      border: selectedDepartamento && selectedDepartamento.nombre === dep.nombre ? '2px solid #2e4a7d' : 'none',
+                      cursor: 'pointer',
+                      marginBottom: 12,
+                      width: '90%',
+                      transition: 'background 0.2s, border 0.2s'
+                    }}
+                  >
+                    {buildingIcon} {dep.nombre}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
+          {/* ...existing code... historial de planes */}
           <div style={{ marginTop: 32, width: 340 }}>
             <div style={{ fontWeight: 700, fontSize: 20, color: '#2e4a7d', marginBottom: 12 }}>Historial de planes</div>
             {planes.length === 0 ? (

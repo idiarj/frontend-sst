@@ -1,4 +1,4 @@
- import React, { useState } from 'react';
+import React, { useState } from 'react';
 import HeadBrand from '../../components/headBrand';
 import Report from '../../components/report';
 import { FaBuilding, FaLaptop } from 'react-icons/fa';
