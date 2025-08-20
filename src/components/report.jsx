@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AiOutlineIdcard, AiOutlinePaperClip } from 'react-icons/ai';
 import { MdOutlineNoteAlt, MdDevices, MdOutlineHome } from 'react-icons/md';
 import { IoMdPerson } from 'react-icons/io';
+import { achetetepese } from '../utils/fetch';
 
 const InputWithIcon = ({ icon, name, placeholder, value, onChange, readOnly }) => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
@@ -127,10 +128,20 @@ const Report = ({ report, status, responseLevel, onChange, setStatus, setRespons
   const [localLevel, setLocalLevel] = useState(responseLevel || "MEDIA");
 
   useEffect(() => {
-    import('./tecnicos.json').then(module => {
-      setTecnicos(module.default || module);
-    });
+    fetchTecnicos();
   }, []);
+
+  async function fetchTecnicos() {
+    try {
+      const response = await achetetepese.get({
+        endpoint: '/tecnicos'
+      })
+      const data = await response.json();
+      setTecnicos(data.data);
+    } catch (error) {
+      console.error('Error fetching tecnicos:', error);
+    }
+  }
 
   useEffect(() => {
     setLocalStatus(status || "PENDIENTE");
@@ -233,7 +244,7 @@ const Report = ({ report, status, responseLevel, onChange, setStatus, setRespons
                 >
                   <option value="">Seleccione un técnico</option>
                   {tecnicos.map(t => (
-                    <option key={t.id} value={t.nombre}>{t.nombre}</option>
+                    <option key={t.ced_persona} value={t.ced_persona}>{t.concat}</option>
                   ))}
                 </select>
                 <span style={arrowIconStyle}>▼</span>

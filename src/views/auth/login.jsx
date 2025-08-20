@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import { FaIdCard, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
 import userPageImage from '../../assets/userPageImage.png'
 import logo from '../../assets/logo.png'
-//import { users } from './users.js'
-// import { getIp } from '../../utils/getIP.js'
 import { achetetepese } from '../../utils/fetch.js'
+import { useUser } from '../../hooks/useUser.jsx'
 
 function Login() {
   const [id_cardNumber, setId_CardNumber] = useState('')
+  const {setUser} = useUser()
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
@@ -33,6 +33,7 @@ function Login() {
         setError(data.error || 'Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.')
         return
       }
+      setUser(data.data);
       navigate('/user/sendReport', {replace: true})
     } catch (error) {
       console.error('Error during login:', error)

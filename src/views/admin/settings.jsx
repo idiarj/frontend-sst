@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import jsPDF from 'jspdf';
-import mockReport from './mockReport.json';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../hooks/useUser';
 import usuariosMock from '../../components/usuariosMock.json';
 import { achetetepese } from '../../utils/fetch';
 
@@ -31,9 +31,12 @@ const API_BASE = "http://localhost:3000"
 // =========================================================
 
 const Settings = () => {
+  const [departamentos, setDepartamentos] = useState([])
   const navigate = useNavigate();
+  const { user } = useUser();
+  console.log(user);
   // UI states (sin lógica real)
-  const [cintilloPreview, setCintilloPreview] = useState(null);
+  // const [cintilloPreview, setCintilloPreview] = useState(null);
   const [cedulaBuscar, setCedulaBuscar] = useState('');
   const [resultados, setResultados] = useState([]);
   // Estados para agregar persona
@@ -42,6 +45,8 @@ const Settings = () => {
   const [cedula, setCedula] = useState('');
   const [numeroTlf, setNumeroTlf] = useState('');
   const [email, setEmail] = useState('');
+  const [departamento, setDepartamento] = useState('');
+  const [esTecnico, setEsTecnico] = useState(false);
   const [errorAgregar, setErrorAgregar] = useState('');
 
   // Estados para exportar reportes
@@ -55,22 +60,45 @@ const Settings = () => {
   console.log(fechaInicio);
 
   // (Puedes dejar este filtro local si aún lo necesitas en otra parte)
-  const filtrarReportes = () => {
-    let reportes = mockReport;
-    if (cedulaUsuario.trim()) {
-      reportes = reportes.filter(r => r.cedula.includes(cedulaUsuario.trim()));
-    }
-    if (estadoReporte) {
-      reportes = reportes.filter(r => r.estado === estadoReporte);
-    }
-    if (fechaInicio && fechaFin) {
-      reportes = reportes.filter(r => {
-        const fecha = new Date(r.fecha);
-        return fecha >= new Date(fechaInicio) && fecha <= new Date(fechaFin);
+  // const filtrarReportes = () => {
+  //   let reportes = mockReport;
+  //   if (cedulaUsuario.trim()) {
+  //     reportes = reportes.filter(r => r.cedula.includes(cedulaUsuario.trim()));
+  //   }
+  //   if (estadoReporte) {
+  //     reportes = reportes.filter(r => r.estado === estadoReporte);
+  //   }
+  //   if (fechaInicio && fechaFin) {
+  //     reportes = reportes.filter(r => {
+  //       const fecha = new Date(r.fecha);
+  //       return fecha >= new Date(fechaInicio) && fecha <= new Date(fechaFin);
+  //     });
+  //   }
+  //   return reportes;
+  // };
+
+  const getDepartamentos = async () => {
+    try {
+      const response = await achetetepese.get({
+        endpoint: '/departamentos',
+        credentials: 'include'
       });
+      const data = await response.json();
+      if (response.ok) {
+        setDepartamentos(data.data);
+      } else {
+        console.error('Error fetching departamentos:', data.error);
+      }
+
+      console.log('Departamentos:', data.data);
+    } catch (error) {
+      console.error('Error fetching departamentos:', error);
     }
-    return reportes;
   };
+
+  useEffect(()=>{
+    getDepartamentos();
+  }, [])
 
   // ===== NUEVA LÓGICA: usar endpoint para descargar ZIP =====
   const exportarPDF = async () => {
@@ -109,7 +137,9 @@ const Settings = () => {
         try {
           const j = await res.json();
           if (j?.error) msg = j.error;
-        } catch {}
+        } catch (error){
+          console.error(error);
+        }
         alert(msg);
         return;
       }
@@ -249,13 +279,25 @@ const Settings = () => {
           </div>
 
           {/* Agregar persona */}
-          <div style={{ marginTop: 32, maxWidth: 500 }}>
-            <h3 style={{ marginBottom: 12 }}>Agregar persona</h3>
+          <div style={{ marginTop: 32, maxWidth: 520 }}>
+            <h3 style={{ marginBottom: 18, fontWeight: 600, fontSize: 22, color: '#3b5998' }}>Agregar persona</h3>
             <form
-              style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'center' }}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: 18,
+                marginBottom: 12,
+                background: '#fff',
+                borderRadius: 12,
+                boxShadow: '0 1px 4px #0001',
+                padding: 24,
+                alignItems: 'center',
+                border: '1px solid #e0e0e0',
+                minWidth: 320
+              }}
               onSubmit={async (e) => {
                 e.preventDefault();
-                if (!nombre.trim() || !apellido.trim() || !cedula.trim() || !email.trim()) {
+                if (!nombre.trim() || !apellido.trim() || !cedula.trim() || !email.trim() || !departamento.trim()) {
                   setErrorAgregar('Completa todos los campos.');
                   return;
                 }
@@ -269,65 +311,120 @@ const Settings = () => {
                       id_cardNumber: cedula,
                       phone_number: numeroTlf,
                       email,
+                      id_departamento: departamento ? Number(departamento) : undefined,
+                      es_tecnico: Boolean(esTecnico),
                     }
                   })
+                  if (response.ok) {
+                    setErrorAgregar('Persona agregada correctamente.');
+                    setNombre('');
+                    setApellido('');
+                    setCedula('');
+                    setNumeroTlf('');
+                    setEmail('');
+                    setDepartamento('');
+                    setEsTecnico(false);
+                  } else {
+                    setErrorAgregar('Error al agregar persona.');
+                  }
                 } catch (error) {
-                  // Manejo de error opcional
+                  console.error(error);
+                  setErrorAgregar('Error al agregar persona.');
                 }
-                setErrorAgregar('');
-                setNombre('');
-                setApellido('');
-                setCedula('');
+
               }}
             >
-              <input
-                type="text"
-                placeholder="Nombre"
-                value={nombre}
-                onChange={e => setNombre(e.target.value)}
-                style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }}
-                required
-              />
-              <input
-                type="text"
-                placeholder="Apellido"
-                value={apellido}
-                onChange={e => setApellido(e.target.value)}
-                style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }}
-                required
-              />
-              <input
-                type="text"
-                placeholder="Numero telefonico. Ejp: 414-6503436"
-                value={numeroTlf}
-                onChange={e => setNumeroTlf(e.target.value)}
-                style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }}
-                required
-              />
-              <input
-                type="text"
-                placeholder="Cédula"
-                value={cedula}
-                onChange={e => setCedula(e.target.value)}
-                style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }}
-                required
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }}
-                required
-              />
-              <button
-                type="submit"
-                style={{ background: '#3b5998', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 16px', cursor: 'pointer', fontWeight: 500 }}
-              >
-                Agregar
-              </button>
-              {errorAgregar && <span style={{ color: errorAgregar.includes('correctamente') ? 'green' : 'red', fontSize: 15, marginLeft: 8 }}>{errorAgregar}</span>}
-            </form>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+    <div style={{ gridColumn: '1 / -1', display: 'flex', alignItems: 'center', gap: 12 }}>
+      <input
+        type="checkbox"
+        id="esTecnico"
+        checked={esTecnico}
+        onChange={e => setEsTecnico(e.target.checked)}
+        style={{ marginRight: 8 }}
+      />
+      <label htmlFor="esTecnico" style={{ fontWeight: 500, cursor: 'pointer', userSelect: 'none' }}>¿Es técnico?</label>
+    </div>
+      <label style={{ fontWeight: 500, marginBottom: 2 }}>Nombre</label>
+      <input
+        type="text"
+        placeholder="Nombre"
+        value={nombre}
+        onChange={e => setNombre(e.target.value)}
+        style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }}
+        required
+      />
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <label style={{ fontWeight: 500, marginBottom: 2 }}>Apellido</label>
+      <input
+        type="text"
+        placeholder="Apellido"
+        value={apellido}
+        onChange={e => setApellido(e.target.value)}
+        style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }}
+        required
+      />
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <label style={{ fontWeight: 500, marginBottom: 2 }}>Teléfono</label>
+      <input
+        type="text"
+        placeholder="Ej: 414-6503436"
+        value={numeroTlf}
+        onChange={e => setNumeroTlf(e.target.value)}
+        style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }}
+        required
+      />
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <label style={{ fontWeight: 500, marginBottom: 2 }}>Cédula</label>
+      <input
+        type="text"
+        placeholder="Cédula"
+        value={cedula}
+        onChange={e => setCedula(e.target.value)}
+        style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }}
+        required
+      />
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <label style={{ fontWeight: 500, marginBottom: 2 }}>Email</label>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }}
+        required
+      />
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <label style={{ fontWeight: 500, marginBottom: 2 }}>Departamento</label>
+      <select
+        value={departamento}
+        onChange={e => setDepartamento(e.target.value)}
+        style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }}
+        required
+      >
+        <option value="">Selecciona departamento</option>
+        {departamentos.map(dep => (
+          <option key={dep.id_departamento} value={dep.id_departamento}>
+            {dep.nom_departamento}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div style={{ gridColumn: '1 / -1', display: 'flex', alignItems: 'center', gap: 12, marginTop: 8 }}>
+      <button
+        type="submit"
+        style={{ background: '#3b5998', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 28px', cursor: 'pointer', fontWeight: 600, fontSize: 17 }}
+      >
+        Agregar
+      </button>
+      {errorAgregar && <span style={{ color: errorAgregar.includes('correctamente') ? 'green' : 'red', fontSize: 15 }}>{errorAgregar}</span>}
+    </div>
+  </form>
           </div>
 
         </div>
