@@ -128,20 +128,10 @@ const Report = ({ report, status, responseLevel, onChange, setStatus, setRespons
   const [localLevel, setLocalLevel] = useState(responseLevel || "MEDIA");
 
   useEffect(() => {
-    fetchTecnicos();
+    import('./tecnicos.json').then(module => {
+      setTecnicos(module.default || module);
+    });
   }, []);
-
-  async function fetchTecnicos() {
-    try {
-      const response = await achetetepese.get({
-        endpoint: '/tecnicos'
-      })
-      const data = await response.json();
-      setTecnicos(data.data);
-    } catch (error) {
-      console.error('Error fetching tecnicos:', error);
-    }
-  }
 
   useEffect(() => {
     setLocalStatus(status || "PENDIENTE");
@@ -244,7 +234,7 @@ const Report = ({ report, status, responseLevel, onChange, setStatus, setRespons
                 >
                   <option value="">Seleccione un técnico</option>
                   {tecnicos.map(t => (
-                    <option key={t.ced_persona} value={t.ced_persona}>{t.concat}</option>
+                    <option key={t.id || t.ced_persona || t.nombre} value={t.ced_persona || t.id || t.nombre}>{t.nombre || t.concat}</option>
                   ))}
                 </select>
                 <span style={arrowIconStyle}>▼</span>

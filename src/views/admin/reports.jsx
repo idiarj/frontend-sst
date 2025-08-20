@@ -3,42 +3,23 @@ import HeadBrand from '../../components/headBrand';
 import { fetchMockReport } from './fetchMockReport';
 import logoMini from '../../assets/logoMini.png';
 import Report from '../../components/report';
-// import NavMenu eliminado, ahora está en HeadBrand
 import SearchBar from '../../components/searchBar';
 
 function Reports() {
   const [reports, setReports] = useState([]);
   const [statuses, setStatuses] = useState([]);
   const [responseLevels, setResponseLevels] = useState([]);
-
-  // Estados para dos filtros
   const [filterField1, setFilterField1] = useState('fecha');
   const [filterValue1, setFilterValue1] = useState('');
   const [filterField2, setFilterField2] = useState('estado');
   const [filterValue2, setFilterValue2] = useState('');
 
   useEffect(() => {
-    fetchMockReport().then(data => {
-      const base = data;
-      const fakeReports = [
-        { ...base.datos_personales, ...base, ...{ id: '001' } },
-        { ...base.datos_personales, ...base, ...{ id: '002', nombre: 'Maria', cedula: '18045240', dispositivo: '003', estado: 'PENDIENTE', nivel_respuesta: 'MEDIA', tecnico: 'JUAN', fecha: '2025-07-07' } },
-      ];
-      setReports(fakeReports);
-      setStatuses(fakeReports.map(r => r.estado || 'PENDIENTE'));
-      setResponseLevels(fakeReports.map(r => r.nivel_respuesta || ''));
-    }).catch(err => {
-      import('./mockReport.json').then(module => {
-        const data = module.default.reporte || module.reporte;
-        const base = data;
-        const fakeReports = [
-          { ...base.datos_personales, ...base, ...{ id: '001' } },
-          { ...base.datos_personales, ...base, ...{ id: '002', nombre: 'Maria', cedula: '18045240', dispositivo: '003', estado: 'EN PROCESO', nivel_respuesta: 'ALTA', tecnico: 'JUAN' } },
-        ];
-        setReports(fakeReports);
-        setStatuses(fakeReports.map(r => r.estado || 'PENDIENTE'));
-        setResponseLevels(fakeReports.map(r => r.nivel_respuesta || ''));
-      });
+    import('./mockdata.json').then(module => {
+      const reportes = module.default?.reportes || module.reportes || [];
+      setReports(reportes);
+      setStatuses(reportes.map(r => r.estado || 'PENDIENTE'));
+      setResponseLevels(reportes.map(r => r.nivel_respuesta || ''));
     });
   }, []);
 
@@ -55,13 +36,11 @@ function Reports() {
     setReports(prev => prev.map((r, i) => i === idx ? { ...r, nivel_respuesta: level } : r));
   };
 
-  // Handlers para los dos filtros
   const handleField1Change = (e) => setFilterField1(e.target.value);
   const handleValue1Change = (e) => setFilterValue1(e.target.value);
   const handleField2Change = (e) => setFilterField2(e.target.value);
   const handleValue2Change = (e) => setFilterValue2(e.target.value);
 
-  // Filtrar los reportes según ambos filtros
   const filteredReports = reports.filter((report) => {
     const value1 = filterValue1.toLowerCase();
     const value2 = filterValue2.toLowerCase();

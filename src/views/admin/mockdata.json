@@ -1,142 +1,39 @@
 {
-  "sedes": [
+  "reportes": [
     {
-      "id": "s1",
-      "nombre": "Ministerio del Poder Popular de Petróleo",
-      "lat": 10.6545,
-      "lng": -71.6406,
-      "oficinas": [
-        {
-          "id": "o1",
-          "nombre": "Oficina 01",
-          "dispositivos": [
-            {
-              "id": "001",
-              "nombre": "Dispositivo 01",
-              "tipo": "Laptop",
-              "estado": "EN PROCESO",
-              "usuario": "Simón",
-              "cedula": "18045239",
-              "cargo": "Asistente",
-              "departamento": "RRHH",
-              "observaciones": "Parpadeos constantes",
-              "solucion": "Diagnóstico pendiente"
-            },
-            {
-              "id": "002",
-              "nombre": "Dispositivo 02",
-              "tipo": "PC Escritorio",
-              "estado": "OPERATIVO",
-              "usuario": "María",
-              "cedula": "20123456",
-              "cargo": "Analista",
-              "departamento": "Finanzas",
-              "observaciones": "Sin novedad",
-              "solucion": "N/A"
-            }
-          ]
-        },
-        {
-          "id": "o2",
-          "nombre": "Oficina 02",
-          "dispositivos": [
-            {
-              "id": "003",
-              "nombre": "Dispositivo 03",
-              "tipo": "Impresora",
-              "estado": "DAÑADO",
-              "usuario": "Pedro",
-              "cedula": "19283746",
-              "cargo": "Jefe",
-              "departamento": "Logística",
-              "observaciones": "No imprime",
-              "solucion": "Reparación solicitada"
-            }
-          ]
-        }
-      ]
+      "id": "001",
+      "fecha": "2024-06-02",
+      "nombre": "Simon",
+      "cedula": "28045239",
+      "cargo": "Asistente",
+      "oficina": "Recursos Humanos",
+      "dispositivo": "002",
+      "estado": "PENDIENTE",
+      "nivel_respuesta": "MEDIA",
+      "tecnico": "DAGNIS",
+      "observaciones": "El monitor del equipo 002 de la oficina de recursos humanos presenta parpadeos constantes desde el encendido. Ya se probó con otro cable HDMI y el problema persiste. El equipo es utilizado diariamente para tareas administrativas y afecta la productividad del área.",
+      "asistencia": "No prende / No inicia",
+      "revision": "Monitor",
+      "instalacion": "Todo completo",
+      "respaldo": "Mis documentos",
+      "medio": "Unidad de CD",
+      "monto": 120.50,
+      "metodo": "Transferencia"
     },
     {
-      "id": "s2",
-      "nombre": "Ministerio de Educación",
-      "lat": 10.7000,
-      "lng": -71.6000,
-      "oficinas": [
-        {
-          "id": "o3",
-          "nombre": "Oficina Central",
-          "dispositivos": [
-            {
-              "id": "004",
-              "nombre": "Dispositivo 04",
-              "tipo": "Laptop",
-              "estado": "OPERATIVO",
-              "usuario": "Ana",
-              "cedula": "22334455",
-              "cargo": "Coordinadora",
-              "departamento": "Dirección",
-              "observaciones": "Sin novedad",
-              "solucion": "N/A"
-            }
-          ]
-        },
-        {
-          "id": "o4",
-          "nombre": "Oficina Regional",
-          "dispositivos": [
-            {
-              "id": "005",
-              "nombre": "Dispositivo 05",
-              "tipo": "Tablet",
-              "estado": "EN PROCESO",
-              "usuario": "Luis",
-              "cedula": "33445566",
-              "cargo": "Supervisor",
-              "departamento": "Tecnología",
-              "observaciones": "Pantalla rota",
-              "solucion": "Pendiente repuesto"
-            },
-            {
-              "id": "006",
-              "nombre": "Dispositivo 06",
-              "tipo": "PC Escritorio",
-              "estado": "OPERATIVO",
-              "usuario": "Carmen",
-              "cedula": "44556677",
-              "cargo": "Secretaria",
-              "departamento": "Administración",
-              "observaciones": "Sin novedad",
-              "solucion": "N/A"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s3",
-      "nombre": "Ministerio de Salud",
-      "lat": 10.7200,
-      "lng": -71.6500,
-      "oficinas": [
-        {
-          "id": "o5",
-          "nombre": "Oficina Epidemiología",
-          "dispositivos": [
-            {
-              "id": "007",
-              "nombre": "Dispositivo 07",
-              "tipo": "Laptop",
-              "estado": "OPERATIVO",
-              "usuario": "José",
-              "cedula": "55667788",
-              "cargo": "Médico",
-              "departamento": "Epidemiología",
-              "observaciones": "Sin novedad",
-              "solucion": "N/A"
-            }
-          ]
-        }
-      ]
+      "id": "002",
+      "fecha": "2025-08-02",
+      "nombre": "Maria",
+      "cedula": "18045240",
+      "cargo": "Analista",
+      "oficina": "Finanzas",
+      "dispositivo": "003",
+      "estado": "APROBADO",
+      "nivel_respuesta": "ALTA",
+      "tecnico": "JUAN",
+      "observaciones": "Pago realizado correctamente.",
+      "monto": 200.00,
+      "metodo": "Efectivo"
     }
   ]
 }
