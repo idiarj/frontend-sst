@@ -138,5 +138,42 @@
         }
       ]
     }
+  ],
+  "reportes": [
+    {
+      "id": "001",
+      "fecha": "2024-06-02",
+      "nombre": "Simon",
+      "cedula": "28045239",
+      "cargo": "Asistente",
+      "oficina": "Recursos Humanos",
+      "dispositivo": "002",
+      "estado": "PENDIENTE",
+      "nivel_respuesta": "MEDIA",
+      "tecnico": "DAGNIS",
+      "observaciones": "El monitor del equipo 002 de la oficina de recursos humanos presenta parpadeos constantes desde el encendido. Ya se probó con otro cable HDMI y el problema persiste. El equipo es utilizado diariamente para tareas administrativas y afecta la productividad del área.",
+      "asistencia": "No prende / No inicia",
+      "revision": "Monitor",
+      "instalacion": "Todo completo",
+      "respaldo": "Mis documentos",
+      "medio": "Unidad de CD",
+      "monto": 120.50,
+      "metodo": "Transferencia"
+    },
+    {
+      "id": "002",
+      "fecha": "2025-08-02",
+      "nombre": "Maria",
+      "cedula": "18045240",
+      "cargo": "Analista",
+      "oficina": "Finanzas",
+      "dispositivo": "003",
+      "estado": "APROBADO",
+      "nivel_respuesta": "ALTA",
+      "tecnico": "JUAN",
+      "observaciones": "Pago realizado correctamente.",
+      "monto": 200.00,
+      "metodo": "Efectivo"
+    }
   ]
 }
