@@ -33,7 +33,7 @@ function Devices() {
 
   const sedeUnica = {
     id: 1,
-    nombre: 'Sede Principal',
+    nombre: 'Sede Administrativa',
     departamentos: mockDepartamentos
   };
 
