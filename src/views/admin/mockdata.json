@@ -20,7 +20,10 @@
               "cargo": "Asistente",
               "departamento": "RRHH",
               "observaciones": "Parpadeos constantes",
-              "solucion": "Diagnóstico pendiente"
+              "solucion": "Diagnóstico pendiente",
+              "productoNombre": "MONITOR 24'' FULL HD, 60HZ, PANEL VA/IPS CON OJOS ANTIFATIGA",
+              "precio": 130,
+              "fecha": "2025-08-20"
             },
             {
               "id": "002",
@@ -32,7 +35,10 @@
               "cargo": "Analista",
               "departamento": "Finanzas",
               "observaciones": "Sin novedad",
-              "solucion": "N/A"
+              "solucion": "N/A",
+              "productoNombre": "LOYITECH MK345",
+              "precio": 50,
+              "fecha": "2025-08-19"
             }
           ]
         },
@@ -50,7 +56,10 @@
               "cargo": "Jefe",
               "departamento": "Logística",
               "observaciones": "No imprime",
-              "solucion": "Reparación solicitada"
+              "solucion": "Reparación solicitada",
+              "productoNombre": "REPARACIÓN DE IMPRESORA EPSON L3110",
+              "precio": 80,
+              "fecha": "2025-08-18"
             }
           ]
         }
@@ -76,7 +85,10 @@
               "cargo": "Coordinadora",
               "departamento": "Dirección",
               "observaciones": "Sin novedad",
-              "solucion": "N/A"
+              "solucion": "N/A",
+              "productoNombre": "TABLET PANTALLA REPUESTO",
+              "precio": 60,
+              "fecha": "2025-08-17"
             }
           ]
         },
@@ -94,7 +106,10 @@
               "cargo": "Supervisor",
               "departamento": "Tecnología",
               "observaciones": "Pantalla rota",
-              "solucion": "Pendiente repuesto"
+              "solucion": "Pendiente repuesto",
+              "productoNombre": "MONITOR 24'' FULL HD, 60HZ, PANEL VA/IPS CON OJOS ANTIFATIGA",
+              "precio": 130,
+              "fecha": "2025-08-16"
             },
             {
               "id": "006",
@@ -106,7 +121,10 @@
               "cargo": "Secretaria",
               "departamento": "Administración",
               "observaciones": "Sin novedad",
-              "solucion": "N/A"
+              "solucion": "N/A",
+              "productoNombre": "LOYITECH MK345",
+              "precio": 50,
+              "fecha": "2025-08-15"
             }
           ]
         }
@@ -132,7 +150,10 @@
               "cargo": "Médico",
               "departamento": "Epidemiología",
               "observaciones": "Sin novedad",
-              "solucion": "N/A"
+              "solucion": "N/A",
+              "productoNombre": "REPARACIÓN DE IMPRESORA EPSON L3110",
+              "precio": 80,
+              "fecha": "2025-08-14"
             }
           ]
         }
